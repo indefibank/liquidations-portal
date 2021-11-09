@@ -4,9 +4,9 @@ This user interface acts as a backstop to democratize access to collateral witho
 
 # Introduction
 
-Liquidations are the automatic transfer of collateral from an insufficiently collateralized vault, along with the transfer of that vault's debt, to the Maker protocol. Auctions are therefore used to sell the transfered collateral for DAI in an attempt to cancel out the debt now assigned to the protocol.
+Liquidations are the automatic transfer of collateral from an insufficiently collateralized vault, along with the transfer of that vault's debt, to the Maker protocol. Auctions are therefore used to sell the transfered collateral for USDV in an attempt to cancel out the debt now assigned to the protocol.
 
-This is achieved through Liquidations2.0, which is a Dutch-style auction system, where auction prices start high and drop over time. This auction system uses DAI for all collateral purchases, meaning that as time passes, the DAI that the protocol is willing to accept for the offered collateral will also fall.
+This is achieved through Liquidations2.0, which is a Dutch-style auction system, where auction prices start high and drop over time. This auction system uses USDV for all collateral purchases, meaning that as time passes, the USDV that the protocol is willing to accept for the offered collateral will also fall.
 
 For more information on the technical implementation of Liquidations2.0 please refer to the [Forum Post](https://forum.makerdao.com/t/mip45-liquidations-2-0-liq-2-0-liquidation-system-redesign/6352) and our [Liquidations2.0 Module](https://docs.makerdao.com/smart-contract-modules/dog-and-clipper-detailed-documentation) documentation on docs.makerdao.com. Alternatively, for more technical users, this Auction-Demo-Keeper [educational resource](https://github.com/makerdao/auction-demo-keeper) will help Keepers transition from Liquidations1.2 to Liquidations2.0.
 
@@ -14,21 +14,21 @@ The following guide will show you how to get setup to purchase collateral and pa
 
 # Unlock and Authorize
 
-By clicking on the Deposit/Withdraw button on the homepage header, the user will be asked to conduct two one-time actions to **Unlock DAI to bid**:
+By clicking on the Deposit/Withdraw button on the homepage header, the user will be asked to conduct two one-time actions to **Unlock USDV to bid**:
 
-<img src="https://i.imgur.com/aO7HrUE.png" alt="unlock dai" width="400" />
+<img src="https://i.imgur.com/aO7HrUE.png" alt="unlock usdv" width="400" />
 
-This modal requires two transactions; 1. Unlock Dai in the VAT - which authorizes the user's address to deposit into the VAT. 2. Authorize the VAT - which authorizes the VAT to use the DAI that the user will deposit.
+This modal requires two transactions; 1. Unlock Usdv in the VAT - which authorizes the user's address to deposit into the VAT. 2. Authorize the VAT - which authorizes the VAT to use the USDV that the user will deposit.
 
-Note: The VAT contract is the core vault engine of the Maker Protocol and as such manages the central accounting invariants of DAI. Depositing and interacting with the VAT is therefore necessary in order to participate in auctions. More technical information about the VAT can be found [here](https://docs.makerdao.com/smart-contract-modules/core-module/vat-detailed-documentation#2-contract-details).
+Note: The VAT contract is the core vault engine of the Maker Protocol and as such manages the central accounting invariants of USDV. Depositing and interacting with the VAT is therefore necessary in order to participate in auctions. More technical information about the VAT can be found [here](https://docs.makerdao.com/smart-contract-modules/core-module/vat-detailed-documentation#2-contract-details).
 
-# Deposit Dai to Bid
+# Deposit Usdv to Bid
 
-Once the above modal transactions are confirmed, the user will be able specify an amount of DAI to deposit from their wallet into the VAT.
+Once the above modal transactions are confirmed, the user will be able specify an amount of USDV to deposit from their wallet into the VAT.
 
-<img src="https://i.imgur.com/XKhzmFv.png" alt="unlock dai" width="400" />
+<img src="https://i.imgur.com/XKhzmFv.png" alt="unlock usdv" width="400" />
 
-The DAI that the user has deposited into the VAT will then be available for auctions. Following this step, the user can proceed to the collateral-specific page.
+The USDV that the user has deposited into the VAT will then be available for auctions. Following this step, the user can proceed to the collateral-specific page.
 
 # Bidding on Collateral
 
@@ -36,15 +36,15 @@ All supported collateral types that have active auctions will be shown on the ho
 
 Upon visiting the Auction page for a specific collateral type, the user can see each auction represented by a card showing the corresponding information for that Auction ID:
 
-<img src="https://i.imgur.com/j7eFAID.png" alt="unlock dai" width="700" />
+<img src="https://i.imgur.com/j7eFAID.png" alt="unlock usdv" width="700" />
 
 To participate in an auction, the user can then click "Place a Bid". If the user has yet to interact with this collateral, they will be required to first authorize their interaction with the collateral type (clipper contract). This needs only to be done once for **each** different collateral type and will not be required again in the future:
 
-<img src="https://i.imgur.com/FQxKcby.png" alt="unlock dai" width="400" />
+<img src="https://i.imgur.com/FQxKcby.png" alt="unlock usdv" width="400" />
 
-Approving this one-time authorization will then reveal the Auction bid modal allowing the user to specify the amount of DAI they wish to offer and the equivalent collateral that this amount of DAI will purchase.
+Approving this one-time authorization will then reveal the Auction bid modal allowing the user to specify the amount of USDV they wish to offer and the equivalent collateral that this amount of USDV will purchase.
 
-<img src="https://i.imgur.com/biLZw2y.png" alt="unlock dai" width="400" />
+<img src="https://i.imgur.com/biLZw2y.png" alt="unlock usdv" width="400" />
 
 Clicking "Bid" will present the user with a window to approve the transaction, and if approved, the collateral will be deposited into the VAT.
 
@@ -52,7 +52,7 @@ Clicking "Bid" will present the user with a window to approve the transaction, a
 
 Once collateral has been purchased from an auction, it will appear on the collateral page, showing the amount to redeem.
 
-<img src="https://i.imgur.com/h5YfcpG.png" alt="unlock dai" width="700" />
+<img src="https://i.imgur.com/h5YfcpG.png" alt="unlock usdv" width="700" />
 
 Clicking the redeem button will allow a user to redeem the collateral back to their original wallet address.
 

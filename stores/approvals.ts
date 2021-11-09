@@ -3,62 +3,62 @@ import getMaker from '../lib/maker';
 import { transactionsApi } from './transactions';
 
 type Store = {
-  hasJoinDaiApproval: boolean;
-  hasJoinDaiHope: boolean;
+  hasJoinUsdvApproval: boolean;
+  hasJoinUsdvHope: boolean;
   hasIlkHope: Record<string, boolean>;
 
-  setHasJoinDaiApproval: (address: string | undefined) => Promise<void>;
-  setHasJoinDaiHope: (address: string | undefined) => Promise<void>;
+  setHasJoinUsdvApproval: (address: string | undefined) => Promise<void>;
+  setHasJoinUsdvHope: (address: string | undefined) => Promise<void>;
   setHasIlkHope: (address: string, ilk: string) => Promise<void>;
 
-  enableJoinDaiApproval: () => Promise<void>;
-  enableJoinDaiHope: () => Promise<void>;
+  enableJoinUsdvApproval: () => Promise<void>;
+  enableJoinUsdvHope: () => Promise<void>;
   enableIlkHope: (ilk: string) => Promise<void>;
 
-  joinDaiApprovalPending: boolean;
-  joinDaiHopePending: boolean;
+  joinUsdvApprovalPending: boolean;
+  joinUsdvHopePending: boolean;
   joinIlkHopePending: Record<string, boolean>;
 
   initApprovals: (address: string, ilks?: string[]) => Promise<void>;
 };
 
 const [useApprovalsStore] = create<Store>((set, get) => ({
-  hasJoinDaiApproval: false,
-  hasJoinDaiHope: false,
+  hasJoinUsdvApproval: false,
+  hasJoinUsdvHope: false,
   hasIlkHope: {},
-  joinDaiApprovalPending: false,
-  joinDaiHopePending: false,
+  joinUsdvApprovalPending: false,
+  joinUsdvHopePending: false,
   joinIlkHopePending: {},
 
-  setHasJoinDaiApproval: async address => {
+  setHasJoinUsdvApproval: async address => {
     try {
       const maker = await getMaker();
       const allowance = await maker
-        .getToken('DAI')
-        .allowance(address, maker.service('smartContract').getContract('MCD_JOIN_DAI').address);
+        .getToken('USDV')
+        .allowance(address, maker.service('smartContract').getContract('MCD_JOIN_USDV').address);
       set({
-        hasJoinDaiApproval: allowance.toBigNumber().gt(0)
+        hasJoinUsdvApproval: allowance.toBigNumber().gt(0)
       });
     } catch (err) {
       set({
-        hasJoinDaiApproval: false
+        hasJoinUsdvApproval: false
       });
     }
   },
-  setHasJoinDaiHope: async address => {
+  setHasJoinUsdvHope: async address => {
     try {
       const maker = await getMaker();
       const can = await maker
         .service('smartContract')
         .getContract('MCD_VAT')
-        .can(address, maker.service('smartContract').getContract('MCD_JOIN_DAI').address);
+        .can(address, maker.service('smartContract').getContract('MCD_JOIN_USDV').address);
 
       set({
-        hasJoinDaiHope: can.toNumber() === 1
+        hasJoinUsdvHope: can.toNumber() === 1
       });
     } catch (err) {
       set({
-        hasJoinDaiHope: false
+        hasJoinUsdvHope: false
       });
     }
   },
@@ -83,52 +83,52 @@ const [useApprovalsStore] = create<Store>((set, get) => ({
     }
   },
 
-  enableJoinDaiApproval: async () => {
+  enableJoinUsdvApproval: async () => {
     const maker = await getMaker();
-    const address = maker.service('smartContract').getContract('MCD_JOIN_DAI').address;
-    const txCreator = () => maker.getToken('DAI').approveUnlimited(address);
+    const address = maker.service('smartContract').getContract('MCD_JOIN_USDV').address;
+    const txCreator = () => maker.getToken('USDV').approveUnlimited(address);
 
-    await transactionsApi.getState().track(txCreator, 'Join DAI approval sent', {
+    await transactionsApi.getState().track(txCreator, 'Join USDV approval sent', {
       pending: () => {
         set({
-          joinDaiApprovalPending: true
+          joinUsdvApprovalPending: true
         });
       },
       mined: txId => {
-        transactionsApi.getState().setMessage(txId, 'Join DAI approval finished');
+        transactionsApi.getState().setMessage(txId, 'Join USDV approval finished');
         set({
-          hasJoinDaiApproval: true,
-          joinDaiApprovalPending: false
+          hasJoinUsdvApproval: true,
+          joinUsdvApprovalPending: false
         });
       },
       error: () => {
         set({
-          joinDaiApprovalPending: false
+          joinUsdvApprovalPending: false
         });
       }
     });
   },
-  enableJoinDaiHope: async () => {
+  enableJoinUsdvHope: async () => {
     const maker = await getMaker();
-    const address = maker.service('smartContract').getContract('MCD_JOIN_DAI').address;
+    const address = maker.service('smartContract').getContract('MCD_JOIN_USDV').address;
     const txCreator = () => maker.service('smartContract').getContract('MCD_VAT').hope(address);
 
-    await transactionsApi.getState().track(txCreator, 'Join DAI hope sent', {
+    await transactionsApi.getState().track(txCreator, 'Join USDV hope sent', {
       pending: () => {
         set({
-          joinDaiHopePending: true
+          joinUsdvHopePending: true
         });
       },
       mined: txId => {
-        transactionsApi.getState().setMessage(txId, 'Join DAI hope finished');
+        transactionsApi.getState().setMessage(txId, 'Join USDV hope finished');
         set({
-          hasJoinDaiHope: true,
-          joinDaiHopePending: false
+          hasJoinUsdvHope: true,
+          joinUsdvHopePending: false
         });
       },
       error: () => {
         set({
-          joinDaiHopePending: false
+          joinUsdvHopePending: false
         });
       }
     });
@@ -172,8 +172,8 @@ const [useApprovalsStore] = create<Store>((set, get) => ({
   },
 
   initApprovals: async (address, ilks) => {
-    get().setHasJoinDaiApproval(address);
-    get().setHasJoinDaiHope(address);
+    get().setHasJoinUsdvApproval(address);
+    get().setHasJoinUsdvHope(address);
     ilks?.forEach(ilk => get().setHasIlkHope(address, ilk));
   }
 }));

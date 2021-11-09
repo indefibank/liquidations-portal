@@ -1,0 +1,71 @@
+diff --git a/node_modules/@makerdao/dai/dist/contracts/abis.js b/node_modules/@makerdao/dai/dist/contracts/abis.js
+index 6112cae..d91dd71 100644
+--- a/node_modules/@makerdao/dai/dist/contracts/abis.js
++++ b/node_modules/@makerdao/dai/dist/contracts/abis.js
+@@ -23,6 +23,8 @@ var _ERC = _interopRequireDefault(require("./abis/ERC20.json"));
+ 
+ var _WETH = _interopRequireDefault(require("./abis/WETH9.json"));
+ 
++var _WVLX = _interopRequireDefault(require("./abis/WETH9.json"));
++
+ var _DSValue = _interopRequireDefault(require("./abis/DSValue.json"));
+ 
+ var _DSGuard = _interopRequireDefault(require("./abis/DSGuard.json"));
+@@ -68,6 +70,7 @@ exports.daiV1 = daiV1;
+ var dappHub = {
+   dsValue: _DSValue["default"],
+   dsEthToken: _WETH["default"],
++  dsVlxToken: _WVLX["default"],
+   dsGuard: _DSGuard["default"],
+   dsChief: _DSChief["default"],
+   dsSpell: _DSSpell["default"],
+diff --git a/node_modules/@makerdao/dai/dist/contracts/networks.js b/node_modules/@makerdao/dai/dist/contracts/networks.js
+index 1c7c7a3..fdf9804 100644
+--- a/node_modules/@makerdao/dai/dist/contracts/networks.js
++++ b/node_modules/@makerdao/dai/dist/contracts/networks.js
+@@ -25,10 +25,16 @@ var _mainnet = _interopRequireDefault(require("./addresses/mainnet.json"));
+ 
+ var _testnet = _interopRequireDefault(require("./addresses/testnet.json"));
+ 
++var _velas = _interopRequireDefault(require("./addresses/velas.json"));
++
++var _velastestnet = _interopRequireDefault(require("./addresses/velastestnet.json"));
++
+ var addressMapping = {
+   mainnet: _mainnet["default"],
+   kovan: _kovan["default"],
+-  testnet: _testnet["default"]
++  testnet: _testnet["default"],
++  velas: _velas["default"],
++  velastestnet: _velastestnet["default"]
+ };
+ 
+ function contractAddressesInfo(addresses) {
+@@ -128,6 +134,14 @@ var _default = [{
+   name: 'kovan',
+   networkId: 42,
+   contracts: contractInfo('kovan')
++}, {
++  name: 'velas',
++  networkId: 106,
++  contracts: contractInfo('velas')
++}, {
++  name: 'velastestnet',
++  networkId: 111,
++  contracts: contractInfo('velastestnet')
+ }, {
+   name: 'test',
+   networkId: 1337,
+diff --git a/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js b/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js
+index 5cfe080..9f24aca 100644
+--- a/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js
++++ b/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js
+@@ -297,7 +297,7 @@ var TransactionManager = /*#__PURE__*/function (_PublicService) {
+       // the transaction object under that promise's id, so that it can be looked
+       // up when calling a contract function indirectly via two or more nested
+       // service method calls, e.g.
+-      // EthereumCdpService.lockEth -> WethToken.deposit.
++      // EthereumCdpService.lockVLX -> WethToken.deposit.
+ 
+ 
+       if (promise) this._tracker.store((0, _utils.uniqueId)(promise), txo, {

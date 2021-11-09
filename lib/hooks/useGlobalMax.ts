@@ -8,7 +8,7 @@ async function fetchGlobalMax(): Promise<any[]> {
 }
 
 export function useGlobalMax(): any {
-  const { data, error } = useSWR('/total-dai', fetchGlobalMax, { refreshInterval: 3600000 });
+  const { data, error } = useSWR('/total-usdv', fetchGlobalMax, { refreshInterval: 3600000 });
 
   return {
     data,

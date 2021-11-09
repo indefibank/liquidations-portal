@@ -25,7 +25,7 @@ export default function LandingPage(): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Maker Liquidations Portal</title>
+        <title>Velero Liquidations Portal</title>
       </Head>
 
       {/* full width banner image */}
@@ -76,7 +76,7 @@ export default function LandingPage(): JSX.Element {
                       py: 3
                     }}
                   >
-                    To participate in collateral auctions, first you need to deposit Dai in the VAT
+                    To participate in collateral auctions, first you need to deposit Usdv in the VAT
                   </Text>
                   <Flex
                     sx={{ flexDirection: ['column', 'row'], justifyContent: 'center', alignItems: 'center' }}
@@ -125,7 +125,7 @@ export default function LandingPage(): JSX.Element {
                           }
                         }}
                       >
-                        <Text sx={{ fontSize: 3, fontWeight: 'normal' }}>Deposit DAI to start bidding</Text>
+                        <Text sx={{ fontSize: 3, fontWeight: 'normal' }}>Deposit USDV to start bidding</Text>
                         <Icon name="chevron_right" color="surface" size="3" ml="3" />
                       </Button>
                     )}

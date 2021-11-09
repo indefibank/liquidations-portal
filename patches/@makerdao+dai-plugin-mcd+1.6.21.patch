@@ -1,0 +1,45 @@
+diff --git a/node_modules/@makerdao/dai-plugin-mcd/typings/index.d.ts b/node_modules/@makerdao/dai-plugin-mcd/typings/index.d.ts
+index 4033027..2767cc4 100644
+--- a/node_modules/@makerdao/dai-plugin-mcd/typings/index.d.ts
++++ b/node_modules/@makerdao/dai-plugin-mcd/typings/index.d.ts
+@@ -13,8 +13,11 @@ type DaiPlugin = {
+ // TODO: move currency type declaration to @makerdao/currency
+ 
+ export const DAI: Currency;
++export const USDV: Currency;
+ export const DSR_DAI: Currency;
++export const DSR_USDV: Currency;
+ export const MKR: Currency;
++export const VDGT: Currency;
+ export const USD: Currency;
+ 
+ export const BAT: Currency;
+diff --git a/node_modules/@makerdao/dai-plugin-mcd/typings/multicall.d.ts b/node_modules/@makerdao/dai-plugin-mcd/typings/multicall.d.ts
+index b9b0153..24b1860 100644
+--- a/node_modules/@makerdao/dai-plugin-mcd/typings/multicall.d.ts
++++ b/node_modules/@makerdao/dai-plugin-mcd/typings/multicall.d.ts
+@@ -72,6 +72,11 @@ declare global {
+      */
+     daiAvailable: Currency;
+ 
++    /**
++     * The maximum amount USDV available to generate for this vault.
++     */
++    usdvAvailable: Currency;
++
+     /**
+      * The amount of collateral available to withdraw.
+      */
+@@ -249,6 +254,12 @@ declare global {
+      */
+     daiAvailable(id: number): Currency;
+ 
++
++    /**
++     * @param id Numerical id of the vault
++     */
++    usdvAvailable(id: number): Currency;
++
+     /**
+      * Get a vault by id.
+      * @param id Numerical id of the vault

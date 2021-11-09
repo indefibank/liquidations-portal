@@ -1,5 +1,5 @@
 import Maker from '@makerdao/dai';
-import McdPlugin, { DAI } from '@makerdao/dai-plugin-mcd';
+import McdPlugin, { USDV } from '@makerdao/dai-plugin-mcd';
 import LedgerPlugin from '@makerdao/dai-plugin-ledger-web';
 import TrezorPlugin from '@makerdao/dai-plugin-trezor-web';
 import { Web3ReactPlugin } from './maker/web3react';
@@ -8,18 +8,16 @@ import LiquidationPlugin from '@makerdao/dai-plugin-liquidations';
 import { SupportedNetworks, DEFAULT_NETWORK } from './constants';
 import { networkToRpc } from './maker/network';
 
-export const ETH = Maker.ETH;
+export const VLX = Maker.VLX;
 export const USD = Maker.USD;
 
 function chainIdToNetworkName(chainId: number): SupportedNetworks {
   switch (chainId) {
-    case 1:
-      return SupportedNetworks.MAINNET;
-    case 42:
-      return SupportedNetworks.KOVAN;
+    case 106:
+      return SupportedNetworks.VELAS;
+    case 111:
+      return SupportedNetworks.VELASTESTNET;
     case 999:
-      return SupportedNetworks.TESTNET;
-    case 1337:
       return SupportedNetworks.TESTNET;
     default:
       throw new Error(`Unsupported chain id ${chainId}`);
@@ -38,10 +36,10 @@ function determineNetwork(): SupportedNetworks {
   } else {
     // otherwise, to determine the network...
     // 1) check the URL
-    if (window.location.search.includes('mainnet')) {
-      return SupportedNetworks.MAINNET;
-    } else if (window.location.search.includes('kovan')) {
-      return SupportedNetworks.KOVAN;
+    if (window.location.search.includes('velastestnet')) {
+      return SupportedNetworks.VELASTESTNET;
+    } else if (window.location.search.includes('velas')) {
+      return SupportedNetworks.VELAS;
     } else if (window.location.search.includes('testnet')) {
       return SupportedNetworks.TESTNET;
     }
@@ -150,7 +148,7 @@ async function personalSign(message) {
 
 export default getMaker;
 export {
-  DAI,
+  USDV,
   getNetwork,
   isDefaultNetwork,
   isSupportedNetwork,

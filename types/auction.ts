@@ -7,7 +7,7 @@ type Auction = {
   initialCollateral: string;
   urn: string;
   collateralAvailable: BigNumber;
-  daiNeeded: BigNumber;
+  usdvNeeded: BigNumber;
   dustLimit: BigNumber;
   startDate: number;
   endDate: number;

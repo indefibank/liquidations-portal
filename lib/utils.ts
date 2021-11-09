@@ -52,8 +52,8 @@ export function getEtherscanLink(
   type: 'transaction' | 'address'
 ): string {
   const prefix = `https://${
-    ETHERSCAN_PREFIXES[network] || ETHERSCAN_PREFIXES[SupportedNetworks.MAINNET]
-  }etherscan.io`;
+    ETHERSCAN_PREFIXES[network] || ETHERSCAN_PREFIXES[SupportedNetworks.VELAS]
+  }velas.com`;
 
   switch (type) {
     case 'transaction':
@@ -148,8 +148,8 @@ export function fromRay(value): BigNumber {
   return new BigNumber(value).shiftedBy(-27);
 }
 
-export const calculateCollateralAmt = (daiAmt: BigNumber, colPrice: BigNumber): BigNumber =>
-  daiAmt.isNaN() || colPrice.eq(0) ? new BigNumber(0) : daiAmt.div(colPrice);
+export const calculateCollateralAmt = (usdvAmt: BigNumber, colPrice: BigNumber): BigNumber =>
+  usdvAmt.isNaN() || colPrice.eq(0) ? new BigNumber(0) : usdvAmt.div(colPrice);
 
 export const calculateColValue = (colAmt: BigNumber, colPrice: BigNumber): BigNumber =>
   colAmt.times(colPrice);
@@ -175,7 +175,7 @@ export function transformAuctions(response: any): Auction[] {
     initialCollateral: '1000', // can look up by `sales()`
     urn: resp.usr,
     collateralAvailable: resp.lot,
-    daiNeeded: resp.tab,
+    usdvNeeded: resp.tab,
     dustLimit: resp.chost,
     startDate: resp.tic,
     endDate: resp.endDate
@@ -194,12 +194,12 @@ export function getAuctionsByIlk(auctions: any[] = [], ilk: string): any[] {
   return auctions.filter(auction => auction.ilk === ilk);
 }
 
-export function getDaiRequiredForAuctions(auctions: any[] = []): BigNumber {
-  const daiNeeded = auctions.reduce((acc, cur) => {
-    const num = new BigNumber(cur.daiNeeded);
+export function getUsdvRequiredForAuctions(auctions: any[] = []): BigNumber {
+  const usdvNeeded = auctions.reduce((acc, cur) => {
+    const num = new BigNumber(cur.usdvNeeded);
     return acc.plus(num);
   }, new BigNumber(0));
-  return daiNeeded;
+  return usdvNeeded;
 }
 
 export function getTotalCollateralAvailable(auctions: any[] = []): BigNumber {
@@ -213,8 +213,11 @@ export function getTotalCollateralAvailable(auctions: any[] = []): BigNumber {
 export function bigNumToFormat(value: BigNumber, ilk: string): string {
   if (!value) return '';
   const cur = COLLATERAL_MAP[ilk];
+
+  console.log(`ilk: ${ilk}`);
+
   switch (ilk) {
-    case 'DAI':
+    case 'USDV':
       return value.toFormat(2);
     default:
       return cur.bigNumFormatter(value);

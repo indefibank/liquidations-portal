@@ -4,7 +4,7 @@ import { Icon } from '@makerdao/dai-ui-icons';
 import Skeleton from 'react-loading-skeleton';
 
 import { getVulcanizeParam } from 'lib/maker';
-import { getAuctionCountByStatus, getDaiRequiredForAuctions } from 'lib/utils';
+import { getAuctionCountByStatus, getUsdvRequiredForAuctions } from 'lib/utils';
 import { useSystemStats } from 'lib/hooks';
 import { TOOLTIP_DICT } from 'lib/constants';
 import SystemStat from 'types/systemStat';
@@ -34,14 +34,14 @@ export default function SystemStats(): JSX.Element {
       tooltip: TOOLTIP_DICT.UNDERCOLLATERALIZED_VAULTS
     },
     {
-      title: 'Dai required for Auctions',
-      format: val => `${getDaiRequiredForAuctions(val).toFormat(0)} DAI`,
+      title: 'Usdv required for Auctions',
+      format: val => `${getUsdvRequiredForAuctions(val).toFormat(0)} USDV`,
       minWidth: 185,
-      tooltip: TOOLTIP_DICT.DAI_REQUIRED
+      tooltip: TOOLTIP_DICT.USDV_REQUIRED
     },
     {
       title: 'Global max available',
-      format: val => `${val.toFormat(0)} DAI`,
+      format: val => `${val.toFormat(0)} USDV`,
       minWidth: 205,
       tooltip: TOOLTIP_DICT.MAX_AVAILABLE
     }
@@ -60,43 +60,43 @@ export default function SystemStats(): JSX.Element {
     <>
       {/* Desktop */}
       <Box sx={{ display: ['none', 'none', 'block'] }}>
-        <Flex sx={{ justifyContent: 'space-between' }}>
-          {!error ? (
-            <>
-              <Flex sx={{ alignItems: 'center' }}>
-                <Badge variant="circle" p="3px" mr="3" />
-                <Text sx={{ fontSize: 5, fontWeight: 'semiBold' }}>System Stats</Text>
-              </Flex>
-              <ExternalLink href="https://daistats.com/" target="_blank">
-                <Flex sx={{ alignItems: 'center' }}>
-                  <Text
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: 'text',
-                      fontSize: [2, 3],
-                      fontWeight: 'semiBold',
-                      ':hover': { color: 'blueLinkHover' }
-                    }}
-                  >
-                    View more
-                    <Icon ml={2} name="arrowTopRight" size="2" color="primary" />
-                  </Text>
-                </Flex>
-              </ExternalLink>
-            </>
-          ) : (
-            <Flex sx={{ alignItems: 'center' }}>
-              <Flex sx={{ alignItems: 'center' }}>
-                <Badge variant="circle" p="3px" mr="3" bg="error" />
-                <Text sx={{ fontSize: 5, fontWeight: 'semiBold' }}>System Stats</Text>
-              </Flex>
-              <Text sx={{ fontSize: 3, color: 'textSecondary', ml: 3 }}>
-                {'Unable to fetch system data at this time'}
-              </Text>
-            </Flex>
-          )}
-        </Flex>
+        {/*<Flex sx={{ justifyContent: 'space-between' }}>*/}
+        {/*  {!error ? (*/}
+        {/*    <>*/}
+        {/*      <Flex sx={{ alignItems: 'center' }}>*/}
+        {/*        <Badge variant="circle" p="3px" mr="3" />*/}
+        {/*        <Text sx={{ fontSize: 5, fontWeight: 'semiBold' }}>System Stats</Text>*/}
+        {/*      </Flex>*/}
+        {/*      <ExternalLink href="https://daistats.com/" target="_blank">*/}
+        {/*        <Flex sx={{ alignItems: 'center' }}>*/}
+        {/*          <Text*/}
+        {/*            sx={{*/}
+        {/*              display: 'flex',*/}
+        {/*              alignItems: 'center',*/}
+        {/*              color: 'text',*/}
+        {/*              fontSize: [2, 3],*/}
+        {/*              fontWeight: 'semiBold',*/}
+        {/*              ':hover': { color: 'blueLinkHover' }*/}
+        {/*            }}*/}
+        {/*          >*/}
+        {/*            View more*/}
+        {/*            <Icon ml={2} name="arrowTopRight" size="2" color="primary" />*/}
+        {/*          </Text>*/}
+        {/*        </Flex>*/}
+        {/*      </ExternalLink>*/}
+        {/*    </>*/}
+        {/*  ) : (*/}
+        {/*    <Flex sx={{ alignItems: 'center' }}>*/}
+        {/*      <Flex sx={{ alignItems: 'center' }}>*/}
+        {/*        <Badge variant="circle" p="3px" mr="3" bg="error" />*/}
+        {/*        <Text sx={{ fontSize: 5, fontWeight: 'semiBold' }}>System Stats</Text>*/}
+        {/*      </Flex>*/}
+        {/*      <Text sx={{ fontSize: 3, color: 'textSecondary', ml: 3 }}>*/}
+        {/*        {'Unable to fetch system data at this time'}*/}
+        {/*      </Text>*/}
+        {/*    </Flex>*/}
+        {/*  )}*/}
+        {/*</Flex>*/}
         <Flex sx={{ justifyContent: 'space-between', py: 5 }}>
           {statData.map(stat => {
             const statWrapper = (
@@ -128,17 +128,17 @@ export default function SystemStats(): JSX.Element {
       {/* Mobile */}
       <Box sx={{ display: ['block', 'block', 'none'], backgroundColor: 'surface', p: 2 }}>
         <Grid sx={{ p: 3 }}>
-          <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between', mb: 3 }}>
-            <Text sx={{ fontSize: 3, fontWeight: 'semiBold', color: 'text' }}>System Stats</Text>
-            <ExternalLink href="https://daistats.com/" target="_blank">
-              <Flex sx={{ alignItems: 'center' }}>
-                <Text sx={{ fontSize: 3, color: 'text', fontWeight: 'semiBold' }}>
-                  View more
-                  <Icon ml="2" name="arrowTopRight" size="2" color="primary" />
-                </Text>
-              </Flex>
-            </ExternalLink>
-          </Flex>
+          {/*<Flex sx={{ flexDirection: 'row', justifyContent: 'space-between', mb: 3 }}>*/}
+          {/*  <Text sx={{ fontSize: 3, fontWeight: 'semiBold', color: 'text' }}>System Stats</Text>*/}
+          {/*  <ExternalLink href="https://daistats.com/" target="_blank">*/}
+          {/*    <Flex sx={{ alignItems: 'center' }}>*/}
+          {/*      <Text sx={{ fontSize: 3, color: 'text', fontWeight: 'semiBold' }}>*/}
+          {/*        View more*/}
+          {/*        <Icon ml="2" name="arrowTopRight" size="2" color="primary" />*/}
+          {/*      </Text>*/}
+          {/*    </Flex>*/}
+          {/*  </ExternalLink>*/}
+          {/*</Flex>*/}
           <Stack gap={3}>
             {statData.map(stat => {
               const statWrapper = (

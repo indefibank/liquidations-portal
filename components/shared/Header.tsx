@@ -60,6 +60,12 @@ const Header = (): JSX.Element => {
           width: '100%'
         }}
       >
+        {/*<Link href={{ pathname: '/', query: { network } }}>*/}
+        {/*  <IconButton aria-label="Maker home" sx={{ width: '80px', height: 4, p: 0 }}>*/}
+        {/*    VELERO*/}
+        {/*    /!*<Icon name="maker" size="40px" color="ornament" sx={{ cursor: 'pointer' }}/>*!/*/}
+        {/*  </IconButton>*/}
+        {/*</Link>*/}
         <Link href={{ pathname: '/', query: { network } }}>
           <IconButton aria-label="Maker home" sx={{ width: '40px', height: 4, p: 0 }}>
             <Icon name="maker" size="40px" sx={{ cursor: 'pointer' }} />
@@ -123,7 +129,7 @@ const Header = (): JSX.Element => {
 
           {address && (
             <Button
-              aria-label="Deposit or Withdraw Dai"
+              aria-label="Deposit or Withdraw Usdv"
               sx={{
                 variant: 'buttons.card',
                 borderRadius: 'round',
@@ -141,7 +147,7 @@ const Header = (): JSX.Element => {
               onClick={toggleDepositWithdraw}
             >
               <Flex sx={{ alignItems: 'center' }}>
-                <Text>{bigNumToFormat(vatBalance, 'DAI')}</Text>
+                <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
                 <Icon name="dai" size="16px" sx={{ mx: [0, 2] }} />
                 <Text sx={{ display: ['none', 'block'] }}>Deposit/Withdraw</Text>
               </Flex>

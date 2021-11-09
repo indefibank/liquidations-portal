@@ -51,7 +51,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
   const requiresReset = timeLeft <= 0;
 
   // check vat balance exists
-  const hasDai = vatBalance.gt(0);
+  const hasUsdv = vatBalance.gt(0);
 
   const auctionPrice = calculateColValue(collateralAvailable, unitPrice);
 
@@ -138,21 +138,21 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
               </Text>
             </Flex>
             <Flex sx={{ flexDirection: 'column' }}>
-              <Text sx={{ color: 'textSecondary' }}>{`DAI per ${symbol}`}</Text>
+              <Text sx={{ color: 'textSecondary' }}>{`USDV per ${symbol}`}</Text>
               <Text>{bigNumFormatter(unitPrice)}</Text>
             </Flex>
           </Stack>
           <Flex sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-            <Button disabled={!hasDai || requiresReset} onClick={() => setShowDialog(true)}>
+            <Button disabled={!hasUsdv || requiresReset} onClick={() => setShowDialog(true)}>
               {address ? (requiresReset ? 'Auction requires reset' : 'Place a bid') : 'Connect to bid'}
             </Button>
-            {address && !hasDai && (
+            {address && !hasUsdv && (
               <Button
                 variant="textual"
                 sx={{ color: 'primary', fontSize: 1, p: 0 }}
                 onClick={toggleDepositWithdraw}
               >
-                Deposit DAI to Bid
+                Deposit USDV to Bid
               </Button>
             )}
             <Flex sx={{ justifyContent: 'space-between' }}>
@@ -163,7 +163,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
                 >
                   <Text sx={{ color: 'textSecondary' }}>Dust limit</Text>
                 </Tooltip>
-                <Text>{dustLimit.toFormat(2)} DAI</Text>
+                <Text>{dustLimit.toFormat(2)} USDV</Text>
               </Flex>
               <Flex sx={{ flexDirection: ['row', 'column'] }}>
                 <Tooltip
@@ -172,7 +172,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
                 >
                   <Text sx={{ color: 'textSecondary' }}>Auction price</Text>
                 </Tooltip>
-                <Text>{auctionPrice.toFormat(2)} DAI</Text>
+                <Text>{auctionPrice.toFormat(2)} USDV</Text>
               </Flex>
             </Flex>
           </Flex>
@@ -245,20 +245,20 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
               </ExternalLink>
             </Flex>
             <Flex sx={{ flexDirection: 'column' }}>
-              <Text sx={{ color: 'textSecondary' }}>{`DAI per ${symbol}`}</Text>
+              <Text sx={{ color: 'textSecondary' }}>{`USDV per ${symbol}`}</Text>
               <Text>{bigNumFormatter(unitPrice)}</Text>
             </Flex>
           </Grid>
-          <Button disabled={!hasDai || requiresReset} onClick={() => setShowDialog(true)}>
+          <Button disabled={!hasUsdv || requiresReset} onClick={() => setShowDialog(true)}>
             {address ? (requiresReset ? 'Auction requires reset' : 'Place a bid') : 'Connect to bid'}
           </Button>
-          {address && !hasDai && (
+          {address && !hasUsdv && (
             <Button
               variant="textual"
               sx={{ color: 'primary', fontSize: 1, p: 0 }}
               onClick={toggleDepositWithdraw}
             >
-              Deposit DAI to Bid
+              Deposit USDV to Bid
             </Button>
           )}
           <Flex sx={{ justifyContent: 'space-between' }}>
@@ -269,7 +269,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
               >
                 <Text sx={{ color: 'textSecondary' }}>Dust limit</Text>
               </Tooltip>
-              <Text>{dustLimit.toFormat(2)} DAI</Text>
+              <Text>{dustLimit.toFormat(2)} USDV</Text>
             </Flex>
             <Flex sx={{ flexDirection: 'column' }}>
               <Tooltip
@@ -278,7 +278,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
               >
                 <Text sx={{ color: 'textSecondary' }}>Auction price</Text>
               </Tooltip>
-              <Text sx={{ textAlign: 'right' }}>{auctionPrice.toFormat(2)} DAI</Text>
+              <Text sx={{ textAlign: 'right' }}>{auctionPrice.toFormat(2)} USDV</Text>
             </Flex>
           </Flex>
         </Grid>
