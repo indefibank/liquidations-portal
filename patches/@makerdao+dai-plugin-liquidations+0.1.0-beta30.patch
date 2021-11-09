@@ -155,24 +155,60 @@ index 371af36..0000000
 -}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
 new file mode 100644
-index 0000000..2403ef5
+index 0000000..32514a1
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,9 @@
 +{
-+  "MCD_DOG": "0xc1F5856c066cfdD59D405DfCf1e77F667537bc99",
-+  "MCD_CLIP_LINK_A": "0xc84b50Ea1cB3f964eFE51961140057f7E69b09c1"
++  "MCD_DOG": "0x7e4D6C2E61412386f4A07268E6Cf22896B2a392d",
++  "MCD_END": "0x47357DA229898573651B538CBc919D5eb47210fe",
++  "MCD_ESM": "0x63aCA4a3FF50AF881566113552Ac7f87c221C09D",
++  "ILK_REGISTRY": "0x6E2faD71Bb6a6cA86D204f1EbbB152855A9295dF",
++  "CLIPPER_MOM": "0xBD4B941e9D68b5DFb984efcFd78AbAf2eA5da45F",
++  "MCD_CLIP_VLX_A": "0x7E7dcd51167f02e240f738c1E81e93A1eDB16233",
++  "MCD_CLIP_CALC_VLX_A": "0xa2fCdEa108cE4BE575610020A929B3E8294739ac"
 +}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
 new file mode 100644
-index 0000000..2403ef5
+index 0000000..ddfc8a9
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
-@@ -0,0 +1,4 @@
+@@ -0,0 +1,9 @@
 +{
-+  "MCD_DOG": "0xc1F5856c066cfdD59D405DfCf1e77F667537bc99",
-+  "MCD_CLIP_LINK_A": "0xc84b50Ea1cB3f964eFE51961140057f7E69b09c1"
++  "MCD_DOG": "0x36407dC071EE7024B2c79aCFB2087EFCeA574de2",
++  "MCD_END": "0xF473Ef87A21E69f992DEF8e237a80F24c8000473",
++  "MCD_ESM": "0x52f827a8975Cd56F82E375cf06291CF8A8029694",
++  "ILK_REGISTRY": "0x50dDd2006153C3E8fcF439Ad46B9AE344D3Be2d0",
++  "CLIPPER_MOM": "0x59a3A32c27eD80E3B0208540dFF334488C931daB",
++  "MCD_CLIP_VLX_A": "0x1c73c5597CDA1B3c1d20584CcA8b27dA4eB44Ae8",
++  "MCD_CLIP_CALC_VLX_A": "0x52A6243E6815dDCc69c44dC41404a29137119270"
 +}
+diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json
+index 8e448e0..6b5b6b7 100644
+--- a/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json
++++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json
+@@ -2,7 +2,9 @@
+   "chief": {
+     "inception_block": {
+       "mainnet": "0x487813",
+-      "kovan": "0x649575"
++      "kovan": "0x649575",
++      "velas": "0x10d16",
++      "velastestnet": "0x1195f1"
+     },
+     "events": {
+       "etch": "0x4f0892983790f53eea39a7a496f6cb40e8811b313871337b6a761efc6c67bb1f",
+@@ -15,7 +17,9 @@
+   "pause": {
+     "inception_block": {
+       "mainnet": "8928171",
+-      "kovan": "14764552"
++      "kovan": "14764552",
++      "velas": "68886",
++      "velastestnet": "1152497"
+     },
+     "events": {
+       "exec": "0x168ccd6700000000000000000000000000000000000000000000000000000000",
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js b/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
 index f183561..8328ecc 100644
 --- a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js

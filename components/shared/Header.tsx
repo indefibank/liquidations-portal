@@ -3,7 +3,19 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import BigNumber from 'bignumber.js';
-import { Button, Flex, NavLink, Container, Close, Box, IconButton, Divider, jsx, Text } from 'theme-ui';
+import {
+  Button,
+  Flex,
+  NavLink,
+  Container,
+  Close,
+  Box,
+  IconButton,
+  Divider,
+  jsx,
+  Text,
+  Image
+} from 'theme-ui';
 import { useBreakpointIndex } from '@theme-ui/match-media';
 import { Menu, MenuButton, MenuItem, MenuList } from '@reach/menu-button';
 import { Icon } from '@makerdao/dai-ui-icons';
@@ -61,14 +73,15 @@ const Header = (): JSX.Element => {
         }}
       >
         {/*<Link href={{ pathname: '/', query: { network } }}>*/}
-        {/*  <IconButton aria-label="Maker home" sx={{ width: '80px', height: 4, p: 0 }}>*/}
+        {/*  <IconButton aria-label="Velero home" sx={{ width: '80px', height: 4, p: 0 }}>*/}
         {/*    VELERO*/}
         {/*    /!*<Icon name="maker" size="40px" color="ornament" sx={{ cursor: 'pointer' }}/>*!/*/}
         {/*  </IconButton>*/}
         {/*</Link>*/}
         <Link href={{ pathname: '/', query: { network } }}>
-          <IconButton aria-label="Maker home" sx={{ width: '40px', height: 4, p: 0 }}>
-            <Icon name="maker" size="40px" sx={{ cursor: 'pointer' }} />
+          <IconButton aria-label="Velero home" sx={{ width: '40px', height: 4, p: 0 }}>
+            {/*<Icon name="maker" size="40px" sx={{ cursor: 'pointer' }} />*/}
+            <Text sx={{ cursor: 'pointer' }}>VELERO</Text>
           </IconButton>
         </Link>
         <Flex sx={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -114,18 +127,18 @@ const Header = (): JSX.Element => {
             </MenuButton>
           </Menu>
 
-          <Link href={{ pathname: '/education', query: { network } }} passHref>
-            <NavLink
-              p={0}
-              sx={{
-                display: ['none', 'block'],
-                ml: [0, 2, 4],
-                color: router?.asPath?.startsWith('/education') ? 'primary' : undefined
-              }}
-            >
-              Education
-            </NavLink>
-          </Link>
+          {/*<Link href={{ pathname: '/education', query: { network } }} passHref>*/}
+          {/*  <NavLink*/}
+          {/*    p={0}*/}
+          {/*    sx={{*/}
+          {/*      display: ['none', 'block'],*/}
+          {/*      ml: [0, 2, 4],*/}
+          {/*      color: router?.asPath?.startsWith('/education') ? 'primary' : undefined*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Education*/}
+          {/*  </NavLink>*/}
+          {/*</Link>*/}
 
           {address && (
             <Button
@@ -148,7 +161,14 @@ const Header = (): JSX.Element => {
             >
               <Flex sx={{ alignItems: 'center' }}>
                 <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
-                <Icon name="dai" size="16px" sx={{ mx: [0, 2] }} />
+                <Image
+                  src={'velero-logo_24x24.svg'}
+                  sx={{
+                    height: 24,
+                    maxWidth: 'none'
+                  }}
+                />
+                {/*<Icon name="usdv" size="16px" sx={{ mx: [0, 2] }} />*/}
                 <Text sx={{ display: ['none', 'block'] }}>Deposit/Withdraw</Text>
               </Flex>
             </Button>
@@ -212,9 +232,9 @@ const MobileMenu = ({ hide, network, router }) => {
           );
         })}
         <Divider sx={{ width: '100%' }} />
-        <Link href={{ pathname: '/education', query: { network } }}>
-          <NavLink>Education</NavLink>
-        </Link>
+        {/*<Link href={{ pathname: '/education', query: { network } }}>*/}
+        {/*  <NavLink>Education</NavLink>*/}
+        {/*</Link>*/}
       </Flex>
     </Container>
   );

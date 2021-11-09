@@ -19,6 +19,35 @@ index 6112cae..d91dd71 100644
    dsGuard: _DSGuard["default"],
    dsChief: _DSChief["default"],
    dsSpell: _DSSpell["default"],
+diff --git a/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json b/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json
+new file mode 100644
+index 0000000..68e6e23
+--- /dev/null
++++ b/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json
+@@ -0,0 +1 @@
++[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guy","type":"address"},{"name":"wad","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"src","type":"address"},{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"wad","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":true,"name":"guy","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":true,"name":"dst","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"dst","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Withdrawal","type":"event"}]
+diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json b/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json
+new file mode 100644
+index 0000000..4663b08
+--- /dev/null
++++ b/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json
+@@ -0,0 +1,5 @@
++{
++  "PROXY_REGISTRY": "0xA180801dd1DB8dE215af785f5f1da59622B89FEa",
++  "DS_PROXY_FACTORY": "0xfd2702f8f5f9EF7C072E1f145E351882B23d9167",
++  "MULTICALL": "0x9FcEBD2132Ce7F1Bf0B559b4239FF3c667dac04a"
++}
+diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
+new file mode 100644
+index 0000000..935e703
+--- /dev/null
++++ b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
+@@ -0,0 +1,5 @@
++{
++  "PROXY_REGISTRY": "0xa80814d1A77327598956a36094A6e2D60c41153F",
++  "DS_PROXY_FACTORY": "0x254803260dA2F24091786AD6b7Fff10f83CF3D71",
++  "MULTICALL": "0x5AA93Be17F44c6eFe2F12a7c085a0737318d0f21"
++}
 diff --git a/node_modules/@makerdao/dai/dist/contracts/networks.js b/node_modules/@makerdao/dai/dist/contracts/networks.js
 index 1c7c7a3..fdf9804 100644
 --- a/node_modules/@makerdao/dai/dist/contracts/networks.js

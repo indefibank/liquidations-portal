@@ -81,28 +81,28 @@ export default function LandingPage(): JSX.Element {
                   <Flex
                     sx={{ flexDirection: ['column', 'row'], justifyContent: 'center', alignItems: 'center' }}
                   >
-                    <NavLink
-                      href={'/education'}
-                      sx={{
-                        px: 3,
-                        borderRadius: 'round',
-                        border: '1px solid',
-                        borderColor: 'primary',
-                        color: account ? 'text' : 'surface',
-                        backgroundColor: account ? 'surface' : 'primary',
-                        display: 'inline-flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        minWidth: [295, 'auto'],
-                        '&:hover': {
-                          borderColor: 'primaryEmphasis',
-                          color: account ? 'primaryEmphasis' : 'surface'
-                        }
-                      }}
-                    >
-                      <Text>Learn more about liquidations</Text>
-                      <Icon name="chevron_right" color={account ? 'primary' : 'surface'} size="3" ml="3" />
-                    </NavLink>
+                    {/*<NavLink*/}
+                    {/*  href={'/education'}*/}
+                    {/*  sx={{*/}
+                    {/*    px: 3,*/}
+                    {/*    borderRadius: 'round',*/}
+                    {/*    border: '1px solid',*/}
+                    {/*    borderColor: 'primary',*/}
+                    {/*    color: account ? 'text' : 'surface',*/}
+                    {/*    backgroundColor: account ? 'surface' : 'primary',*/}
+                    {/*    display: 'inline-flex',*/}
+                    {/*    justifyContent: 'space-between',*/}
+                    {/*    alignItems: 'center',*/}
+                    {/*    minWidth: [295, 'auto'],*/}
+                    {/*    '&:hover': {*/}
+                    {/*      borderColor: 'primaryEmphasis',*/}
+                    {/*      color: account ? 'primaryEmphasis' : 'surface'*/}
+                    {/*    }*/}
+                    {/*  }}*/}
+                    {/*>*/}
+                    {/*  <Text>Learn more about liquidations</Text>*/}
+                    {/*  <Icon name="chevron_right" color={account ? 'primary' : 'surface'} size="3" ml="3" />*/}
+                    {/*</NavLink>*/}
                     {account && (
                       <Button
                         onClick={toggleDepositWithdraw}

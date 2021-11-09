@@ -47,9 +47,9 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     ilk: 'VLX-A',
     symbol: 'VLX',
     bigNumFormatter: (val: BigNumber): string => val.toFormat(2),
-    cardTexturePng: '/assets/eth-card-texture.png',
-    bannerPng: '/assets/eth-banner-texture.png',
-    iconSvg: '/assets/eth-icon.svg',
+    cardTexturePng: '/assets/vlx-card-texture.png',
+    bannerPng: '/assets/vlx-banner-texture.png',
+    iconSvg: '/assets/vlx-icon.svg',
     colorIconName: 'ethCircleColor',
     decimals: 18
   }

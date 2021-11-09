@@ -233,7 +233,7 @@ export default function Auctions(): JSX.Element | null {
           </Stack>
           <Stack gap={3}>
             <SystemStatsSidebar ilk={ilk} />
-            <ResourceBox />
+            {/*<ResourceBox />*/}
           </Stack>
         </SidebarLayout>
       </PrimaryLayout>

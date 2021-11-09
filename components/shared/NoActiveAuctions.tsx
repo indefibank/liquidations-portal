@@ -19,16 +19,17 @@ const NoActiveAuctions = ({ error }: Props): JSX.Element => (
     }}
   >
     <Box>
-      <Icon
-        name="maker"
-        size={5}
-        sx={{
-          p: 2,
-          color: 'textSecondary',
-          border: '2px dashed #D8E0E3',
-          borderRadius: '50%'
-        }}
-      />
+      <h2>VELERO Liquidation Portal</h2>
+      {/*<Icon*/}
+      {/*  name="maker"*/}
+      {/*  size={5}*/}
+      {/*  sx={{*/}
+      {/*    p: 2,*/}
+      {/*    color: 'textSecondary',*/}
+      {/*    border: '2px dashed #D8E0E3',*/}
+      {/*    borderRadius: '50%'*/}
+      {/*  }}*/}
+      {/*/>*/}
     </Box>
     <Text sx={{ color: 'textSecondary' }}>
       {error
