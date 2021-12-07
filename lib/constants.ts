@@ -31,22 +31,22 @@ type CollateralInfo = {
 };
 
 export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
-  // 'BAT-A': {
-  //   name: 'Basic Attention Token',
-  //   ilk: 'BAT-A',
-  //   symbol: 'BAT',
-  //   bigNumFormatter: (val: BigNumber): string => val.toFormat(2),
-  //   cardTexturePng: '/assets/bat-card-texture.png',
-  //   bannerPng: '/assets/bat-banner-texture.png',
-  //   iconSvg: '/assets/bat-icon.svg',
-  //   colorIconName: 'batCircleColor',
-  //   decimals: 18
-  // },
+  'WAG-A': {
+    name: 'Wagyu Swap Token',
+    ilk: 'WAG-A',
+    symbol: 'WAG',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(6),
+    cardTexturePng: '/assets/bat-card-texture.png',
+    bannerPng: '/assets/bat-banner-texture.png',
+    iconSvg: '/assets/wag-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
   'VLX-A': {
     name: 'Velas',
     ilk: 'VLX-A',
     symbol: 'VLX',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(2),
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(6),
     cardTexturePng: '/assets/vlx-card-texture.png',
     bannerPng: '/assets/vlx-banner-texture.png',
     iconSvg: '/assets/vlx-icon.svg',
