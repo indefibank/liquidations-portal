@@ -10,7 +10,8 @@ import {
   Heading,
   Divider,
   Close,
-  Spinner
+  Spinner,
+  Image
 } from 'theme-ui';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import BigNumber from 'bignumber.js';
@@ -187,7 +188,7 @@ const BidModal = ({
               fontSize: 2
             }}
           >
-            View on Etherscan <Icon name="arrowTopRight" size="2" color="accentBlue" />
+            View on evmexplorer.velas.com <Icon name="arrowTopRight" size="2" color="accentBlue" />
           </Text>
         </ExternalLink>
         <Button variant="primaryOutline" onClick={resetBidState} sx={{ width: '100%', mt: 4, mb: 2 }}>
@@ -204,7 +205,7 @@ const BidModal = ({
         sx={
           mobile
             ? { variant: 'dialog.mobile', animation: `${slideUp} 350ms ease` }
-            : { variant: 'dialog.desktop', animation: `${fadeIn} 350ms ease`, width: '450px' }
+            : { variant: 'dialog.desktop', animation: `${fadeIn} 350ms ease`, width: '550px' }
         }
       >
         {bidTxSuccess || bidTxError ? (
@@ -282,7 +283,8 @@ const BidModal = ({
                       onChange={updateValue}
                       type="number"
                       value={
-                        typeof value === 'undefined' ? '0.00' : value.length > 15 ? value.slice(0, 15) : value
+                        typeof value === 'undefined' ? '0.00' : value
+                        // typeof value === 'undefined' ? '0.00' : value.length > 18 ? value.slice(0, 18) : value
                       }
                     />
                     <Flex sx={{ position: 'absolute', right: '30px', top: '13px', alignItems: 'center' }}>
@@ -303,8 +305,9 @@ const BidModal = ({
                         max
                       </Button>
                       <Flex sx={{ alignItems: 'center', ml: 1 }}>
-                        <Icon size={30} name="daiCircleColor" />
-                        <Text sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}>USDV</Text>
+                        {/*<Icon size={30} name="usdv" />*/}
+                        {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
+                        <Text sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}> USDV</Text>
                       </Flex>
                     </Flex>
                   </Flex>
@@ -339,8 +342,8 @@ const BidModal = ({
                       {colAmount.gte(0.01) ? colAmount.toFormat(2) : colAmount.toFormat(4)}
                     </Text>
                     <Flex sx={{ alignItems: 'center' }}>
-                      <Icon size={30} name={colorIconName} />
-                      <Text sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}>{symbol}</Text>
+                      {/*<Icon size={30} name={colorIconName} />*/}
+                      <Text sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}> {symbol}</Text>
                     </Flex>
                   </Flex>
                   <Flex sx={{ justifyContent: 'space-between', mt: 2 }}>

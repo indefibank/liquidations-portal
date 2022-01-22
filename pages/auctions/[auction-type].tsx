@@ -170,7 +170,7 @@ export default function Auctions(): JSX.Element | null {
               <Stack gap={2}>
                 <Flex sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                   <Heading as="h2">{`Active ${type?.toUpperCase()} Auctions`}</Heading>
-                  {vatGemBalance && vatGemBalance.gt(Math.pow(10, -decimals)) && (
+                  {vatGemBalance && (
                     <Button
                       sx={{
                         variant: 'buttons.card',

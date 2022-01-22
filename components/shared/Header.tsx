@@ -160,16 +160,10 @@ const Header = (): JSX.Element => {
               onClick={toggleDepositWithdraw}
             >
               <Flex sx={{ alignItems: 'center' }}>
-                <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
-                <Image
-                  src={'velero-logo_24x24.svg'}
-                  sx={{
-                    height: 24,
-                    maxWidth: 'none'
-                  }}
-                />
+                <Text>{bigNumToFormat(vatBalance, 'USDV')} </Text>
+                {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
                 {/*<Icon name="usdv" size="16px" sx={{ mx: [0, 2] }} />*/}
-                <Text sx={{ display: ['none', 'block'] }}>Deposit/Withdraw</Text>
+                <Text sx={{ display: ['none', 'block'] }}>USDV Deposit/Withdraw</Text>
               </Flex>
             </Button>
           )}

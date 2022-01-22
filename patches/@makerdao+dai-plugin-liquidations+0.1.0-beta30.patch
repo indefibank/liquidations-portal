@@ -212,28 +212,29 @@ index 8e448e0..6b5b6b7 100644
      "events": {
        "exec": "0x168ccd6700000000000000000000000000000000000000000000000000000000",
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js b/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
-index f183561..8328ecc 100644
+index f183561..dae5810 100644
 --- a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
-@@ -41,8 +41,8 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
+@@ -41,8 +41,9 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
  
  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
  
 -var MAINNET_SERVER_URL = 'https://api.makerdao.com/graphql'; //const LOCAL_URL = 'http://localhost:3001/graphql';
 -// const LOCAL_URL = 'https://dd0965745ea7.ngrok.io/graphql'; // temporary ngrok
++var VELAS_SERVER_URL = 'https://api.makerdao.com/graphql';
 +var MAINNET_SERVER_URL = 'https://api.makerdao.com/graphql';
 +//const LOCAL_URL = 'http://localhost:3001/graphql';
  
  var RAD = new _bignumber["default"]('1e45');
  exports.RAD = RAD;
-@@ -95,6 +95,14 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -95,12 +96,20 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
          case 1:
            this.serverUrl = MAINNET_SERVER_URL;
            break;
-+        // case 'velas':
-+        // case 106:
-+        //   this.serverUrl = VELAS_SERVER_URL;
-+        //   break;
++        case 'velas':
++        case 106:
++          this.serverUrl = VELAS_SERVER_URL;
++          break;
 +        // case 'velastestnet':
 +        // case 111:
 +        //   this.serverUrl = VELASTESTNET_SERVER_URL;
@@ -241,7 +242,14 @@ index f183561..8328ecc 100644
          // case 999:
          //   this.serverUrl = LOCAL_URL;
          // break;
-@@ -390,7 +398,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+ 
+         default:
+-          this.serverUrl = MAINNET_SERVER_URL;
++          this.serverUrl = VELAS_SERVER_URL;
+       }
+     }
+   }, {
+@@ -390,7 +399,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
      /* TAKE
        uint256 id,           // Auction id
        uint256 amt,          // Upper limit on amount of collateral to buy  [wad]
@@ -250,7 +258,7 @@ index f183561..8328ecc 100644
        address who,          // Receiver of collateral and external call address
        bytes calldata data   // Data to pass in external call; if length 0, no call is done
      */
-@@ -490,7 +498,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -490,7 +499,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
      }()
      /* struct Sale {
            uint256 pos;  // Index in active array
@@ -259,7 +267,7 @@ index f183561..8328ecc 100644
            uint256 lot;  // collateral to sell [wad]
            address usr;  // Liquidated CDP
            uint96  tic;  // Auction start time
-@@ -788,9 +796,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -788,9 +797,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
      // }
  
    }, {
@@ -271,7 +279,7 @@ index f183561..8328ecc 100644
          var promise, address, amt;
          return _regenerator["default"].wrap(function _callee18$(_context18) {
            while (1) {
-@@ -800,7 +808,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -800,7 +809,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
                  address = this.get('web3').currentAddress();
                  amt = (0, _bignumber["default"])(amount).times(WAD).toFixed();
                  _context18.next = 5;
@@ -280,7 +288,7 @@ index f183561..8328ecc 100644
                    promise: promise
                  });
  
-@@ -815,16 +823,16 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -815,16 +824,16 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
          }, _callee18, this);
        }));
  
@@ -302,7 +310,7 @@ index f183561..8328ecc 100644
          var promise, address, amt;
          return _regenerator["default"].wrap(function _callee19$(_context19) {
            while (1) {
-@@ -834,7 +842,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -834,7 +843,7 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
                  address = this.get('web3').currentAddress();
                  amt = (0, _bignumber["default"])(amount).times(WAD).toFixed();
                  _context19.next = 5;
@@ -311,7 +319,7 @@ index f183561..8328ecc 100644
                    promise: promise
                  });
  
-@@ -849,11 +857,11 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -849,17 +858,18 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
          }, _callee19, this);
        }));
  
@@ -326,7 +334,14 @@ index f183561..8328ecc 100644
      }()
    }, {
      key: "exitGemFromAdapter",
-@@ -942,9 +950,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+     value: function () {
+       var _exitGemFromAdapter = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee20(ilk, amount, _ref4) {
+         var promise, address, amt;
++
+         return _regenerator["default"].wrap(function _callee20$(_context20) {
+           while (1) {
+             switch (_context20.prev = _context20.next) {
+@@ -942,9 +952,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
        return this.get('smartContract').getContractByName('MCD_DOG');
      }
    }, {
@@ -339,7 +354,7 @@ index f183561..8328ecc 100644
      }
    }, {
      key: "_joinGemAdapter",
-@@ -954,5 +962,5 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -954,5 +964,5 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
      }
    }]);
    return LiquidationService;

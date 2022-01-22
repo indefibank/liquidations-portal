@@ -134,7 +134,7 @@ const AuctionOverviewCard = ({ auction, vatBalance }: Props): JSX.Element => {
             <Flex sx={{ flexDirection: 'column' }}>
               <Text sx={{ color: 'textSecondary' }}>Collateral Available</Text>
               <Text sx={{ fontWeight: 'bold', fontSize: 6 }}>
-                {bigNumToFormat(collateralAvailable, ilk)} {symbol}
+                {bigNumToFormat(collateralAvailable, ilk).slice(0, 12)} {symbol}
               </Text>
             </Flex>
             <Flex sx={{ flexDirection: 'column' }}>

@@ -85,6 +85,20 @@ index 1c7c7a3..fdf9804 100644
  }, {
    name: 'test',
    networkId: 1337,
+diff --git a/node_modules/@makerdao/dai/dist/src/eth/SmartContractService.js b/node_modules/@makerdao/dai/dist/src/eth/SmartContractService.js
+index 1c4ed3f..455bfa6 100644
+--- a/node_modules/@makerdao/dai/dist/src/eth/SmartContractService.js
++++ b/node_modules/@makerdao/dai/dist/src/eth/SmartContractService.js
+@@ -123,9 +123,7 @@ var SmartContractService = /*#__PURE__*/function (_PrivateService) {
+           version = _ref3.version,
+           _ref3$wrap = _ref3.wrap,
+           wrap = _ref3$wrap === void 0 ? true : _ref3$wrap;
+-
+       var info = this._getContractInfo(name, version);
+-
+       return this.getContractByAddressAndAbi(info.address, info.abi, {
+         name: name,
+         wrap: wrap
 diff --git a/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js b/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js
 index 5cfe080..9f24aca 100644
 --- a/node_modules/@makerdao/dai/dist/src/eth/TransactionManager.js
