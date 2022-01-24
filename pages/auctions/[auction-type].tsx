@@ -193,43 +193,45 @@ export default function Auctions(): JSX.Element | null {
               <Stack gap={2}>
                 <Flex sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                   <Heading as="h2">{`Active ${type?.toUpperCase()} Auctions`}</Heading>
-                  {vatGemBalance && (
-                    <Button
-                      sx={{
-                        variant: 'buttons.card',
-                        borderRadius: 'round',
-                        '&:hover': {
-                          color: 'text',
-                          borderColor: 'onSecondary',
-                          backgroundColor: 'white'
-                        }
-                      }}
-                      onClick={() => redeemCollateral(ilk)}
-                      disabled={isTxProcessing}
-                    >
-                      <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>
-                        {vatGemBalance.gte(0.01) ? vatGemBalance.toFormat(2) : vatGemBalance.toFormat(4)}{' '}
-                        {symbol} to Redeem
-                      </Text>
-                    </Button>
-                  )}
-                  {['VLX-A'].includes(ilk) && (
-                    <Button
-                      sx={{
-                        variant: 'buttons.card',
-                        borderRadius: 'round',
-                        '&:hover': {
-                          color: 'text',
-                          borderColor: 'onSecondary',
-                          backgroundColor: 'white'
-                        }
-                      }}
-                      onClick={() => unwrap(account?.address)}
-                      disabled={isTxProcessing}
-                    >
-                      <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>unwrap VLX</Text>
-                    </Button>
-                  )}
+                  <div>
+                    {vatGemBalance && (
+                      <Button
+                        sx={{
+                          variant: 'buttons.card',
+                          borderRadius: 'round',
+                          '&:hover': {
+                            color: 'text',
+                            borderColor: 'onSecondary',
+                            backgroundColor: 'white'
+                          }
+                        }}
+                        onClick={() => redeemCollateral(ilk)}
+                        disabled={isTxProcessing}
+                      >
+                        <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>
+                          {vatGemBalance.gte(0.01) ? vatGemBalance.toFormat(2) : vatGemBalance.toFormat(4)}{' '}
+                          {symbol} to Redeem
+                        </Text>
+                      </Button>
+                    )}
+                    {['VLX-A'].includes(ilk) && (
+                      <Button
+                        sx={{
+                          variant: 'buttons.card',
+                          borderRadius: 'round',
+                          '&:hover': {
+                            color: 'text',
+                            borderColor: 'onSecondary',
+                            backgroundColor: 'white'
+                          }
+                        }}
+                        onClick={() => unwrap(account?.address)}
+                        disabled={isTxProcessing}
+                      >
+                        <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>unwrap VLX</Text>
+                      </Button>
+                    )}
+                  </div>
                 </Flex>
               </Stack>
               <Stack gap={2}>
