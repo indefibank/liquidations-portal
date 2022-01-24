@@ -85,6 +85,32 @@ export default function Auctions(): JSX.Element | null {
     });
   };
 
+  const unwrap = async address => {
+    const maker = await getMaker();
+    const amt = await maker
+      .service('smartContract')
+      .getContractByName('VLX')
+      .wrappedContract.balanceOf(address);
+    console.log(`fucking balance ${amt} VLX`);
+    console.log(amt);
+    console.log(maker.service('smartContract').getContractByName('VLX').wrappedContract);
+    const txCreator = () =>
+      maker.service('smartContract').getContractByName('VLX').wrappedContract.withdraw(amt);
+
+    await transactionsApi.getState().track(txCreator, `Unwrapped ${amt} VLX`, {
+      pending: () => {
+        setIsTxProcessing(true);
+      },
+      mined: txId => {
+        transactionsApi.getState().setMessage(txId, `Success unwrapped ${amt} VLX`);
+        setIsTxProcessing(false);
+      },
+      error: () => {
+        setIsTxProcessing(false);
+      }
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -188,6 +214,23 @@ export default function Auctions(): JSX.Element | null {
                         {vatGemBalance.gte(0.01) ? vatGemBalance.toFormat(2) : vatGemBalance.toFormat(4)}{' '}
                         {symbol} to Redeem
                       </Text>
+                    </Button>
+                  )}
+                  {['VLX-A'].includes(ilk) && (
+                    <Button
+                      sx={{
+                        variant: 'buttons.card',
+                        borderRadius: 'round',
+                        '&:hover': {
+                          color: 'text',
+                          borderColor: 'onSecondary',
+                          backgroundColor: 'white'
+                        }
+                      }}
+                      onClick={() => unwrap(account?.address)}
+                      disabled={isTxProcessing}
+                    >
+                      <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>unwrap VLX</Text>
                     </Button>
                   )}
                 </Flex>
