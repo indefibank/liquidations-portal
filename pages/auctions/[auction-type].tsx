@@ -91,9 +91,6 @@ export default function Auctions(): JSX.Element | null {
       .service('smartContract')
       .getContractByName('VLX')
       .wrappedContract.balanceOf(address);
-    console.log(`fucking balance ${amt} VLX`);
-    console.log(amt);
-    console.log(maker.service('smartContract').getContractByName('VLX').wrappedContract);
     const txCreator = () =>
       maker.service('smartContract').getContractByName('VLX').wrappedContract.withdraw(amt);
 
