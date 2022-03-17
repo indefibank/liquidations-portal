@@ -36,8 +36,8 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     ilk: 'WAG-A',
     symbol: 'WAG',
     bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/bat-card-texture.png',
-    bannerPng: '/assets/bat-banner-texture.png',
+    cardTexturePng: '/assets/wag-card-texture.png',
+    bannerPng: '/assets/wag-banner-texture.png',
     iconSvg: '/assets/wag-icon.svg',
     colorIconName: 'ethCircleColor',
     decimals: 18
@@ -52,6 +52,28 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     iconSvg: '/assets/vlx-icon.svg',
     colorIconName: 'ethCircleColor',
     decimals: 18
+  },
+  'VDGT-A': {
+    name: 'Velas',
+    ilk: 'VDGT-A',
+    symbol: 'VDGT',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/vdgt-card-texture.png',
+    bannerPng: '/assets/vdgt-banner-texture.png',
+    iconSvg: '/assets/vdgt-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
+  'WBTC-A': {
+    name: 'Wrapped Bitcoin',
+    ilk: 'WBTC-A',
+    symbol: 'WBTC',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/wbtc-card-texture.png',
+    bannerPng: '/assets/wbtc-banner-texture.png',
+    iconSvg: '/assets/wbtc-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 8
   }
 };
 

@@ -155,10 +155,10 @@ index 371af36..0000000
 -}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
 new file mode 100644
-index 0000000..b623585
+index 0000000..fb12fd4
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,15 @@
 +{
 +  "MCD_DOG": "0x7e4D6C2E61412386f4A07268E6Cf22896B2a392d",
 +  "MCD_END": "0x47357DA229898573651B538CBc919D5eb47210fe",
@@ -168,22 +168,32 @@ index 0000000..b623585
 +  "MCD_CLIP_VLX_A": "0x7E7dcd51167f02e240f738c1E81e93A1eDB16233",
 +  "MCD_CLIP_CALC_VLX_A": "0xa2fCdEa108cE4BE575610020A929B3E8294739ac",
 +  "MCD_CLIP_WAG_A": "0x35a5CC1670Ec38B1a310eE2C97C0BC469151a3a3",
-+  "MCD_CLIP_CALC_WAG_A": "0xeFF499aE6860687037FaE9EA1B53B973F7C2Ddf7"
++  "MCD_CLIP_CALC_WAG_A": "0xeFF499aE6860687037FaE9EA1B53B973F7C2Ddf7",
++  "MCD_CLIP_WBTC_A": "0xabc2DbECB28B220fa1a70393519A473Af4A5A553",
++  "MCD_CLIP_CALC_WBTC_A": "0x60A1AF92B1e96b637FCedcc6b2716e78faB95764",
++  "MCD_CLIP_VDGT_A": "0xFB065FA2b9Eb9f432F134b5610efFae632F17563",
++  "MCD_CLIP_CALC_VDGT_A": "0x97ecBC8E9cC2fFBFE083A626853e116b08D8AF4a"
 +}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
 new file mode 100644
-index 0000000..ddfc8a9
+index 0000000..b0923be
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,15 @@
 +{
-+  "MCD_DOG": "0x36407dC071EE7024B2c79aCFB2087EFCeA574de2",
-+  "MCD_END": "0xF473Ef87A21E69f992DEF8e237a80F24c8000473",
-+  "MCD_ESM": "0x52f827a8975Cd56F82E375cf06291CF8A8029694",
-+  "ILK_REGISTRY": "0x50dDd2006153C3E8fcF439Ad46B9AE344D3Be2d0",
-+  "CLIPPER_MOM": "0x59a3A32c27eD80E3B0208540dFF334488C931daB",
-+  "MCD_CLIP_VLX_A": "0x1c73c5597CDA1B3c1d20584CcA8b27dA4eB44Ae8",
-+  "MCD_CLIP_CALC_VLX_A": "0x52A6243E6815dDCc69c44dC41404a29137119270"
++  "MCD_DOG": "0x5D45Fb492270781d8744c8394d7C8B56Ea03860F",
++  "MCD_END": "0xF73b59012050e90af32A7e0caC469402354F587F",
++  "MCD_ESM": "0x133e9bF20B035e1061001b3e9D60AD5f55F85545",
++  "ILK_REGISTRY": "0x240C0fDCc37BA59B9ea057e55a0fa9E85C51BbFE",
++  "CLIPPER_MOM": "0x43d8e00BBe384a2A8CD393fAa6BFFE4C8Fb030ef",
++  "MCD_CLIP_VLX_A": "0x0F09d02D0510d7724c9CfB39adF9C0A9842bAb08",
++  "MCD_CLIP_CALC_VLX_A": "0xD6e0b48E8377D71157CEdA6aF34338A67D61b7dD",
++  "MCD_CLIP_WAG_A": "0x844732956Be42610fD05F4BBC270A0434BFc75E0",
++  "MCD_CLIP_CALC_WAG_A": "0x878aa2a43987C1811fD054ba27f022D615B66230",
++  "MCD_CLIP_VDGT_A": "0x7D36e24dE1e9a323f58490a775D964f86D498970",
++  "MCD_CLIP_CALC_VDGT_A": "0xB9Ba44dc352e84c9329858a737A11888cF7D60f9",
++  "MCD_CLIP_WBTC_A": "0x0A136ED5fAbe9eD2871E85B1D07C5f648eAe08D0",
++  "MCD_CLIP_CALC_WBTC_A": "0x1FB7F7C4d84DD148d4149FC1E56f495D14C909D1"
 +}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json
 index 8e448e0..6b5b6b7 100644
@@ -380,15 +390,15 @@ index 7e18e96..d260c6e 100644
  
      try {
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/constants.js b/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/constants.js
-index b58a551..e12de99 100644
+index b58a551..2fec0d9 100644
 --- a/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/constants.js
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/constants.js
-@@ -3,72 +3,14 @@
+@@ -3,72 +3,18 @@
  Object.defineProperty(exports, "__esModule", {
    value: true
  });
 -exports.ALL_CLIPS = exports.MCD_CLIP_USDT_A = exports.MCD_CLIP_GUSD_A = exports.MCD_CLIP_PAXUSD_A = exports.MCD_CLIP_TUSD_A = exports.MCD_CLIP_USDC_B = exports.MCD_CLIP_USDC_A = exports.MCD_CLIP_UNIV2DAIUSDC_A = exports.MCD_CLIP_UNIV2DAIUSDT_A = exports.MCD_CLIP_UNIV2AAVEETH_A = exports.MCD_CLIP_UNIV2UNIETH_A = exports.MCD_CLIP_UNIV2LINKETH_A = exports.MCD_CLIP_UNIV2WBTCETH_A = exports.MCD_CLIP_UNIV2WBTCDAI_A = exports.MCD_CLIP_UNIV2ETHUSDT_A = exports.MCD_CLIP_UNIV2USDCETH_A = exports.MCD_CLIP_UNIV2DAIETH_A = exports.MCD_CLIP_ZRX_A = exports.MCD_CLIP_YFI_A = exports.MCD_CLIP_WBTC_A = exports.MCD_CLIP_UNI_A = exports.MCD_CLIP_RENBTC_A = exports.MCD_CLIP_MANA_A = exports.MCD_CLIP_LRC_A = exports.MCD_CLIP_LINK_A = exports.MCD_CLIP_KNC_A = exports.MCD_CLIP_ETH_C = exports.MCD_CLIP_ETH_B = exports.MCD_CLIP_ETH_A = exports.MCD_CLIP_COMP_A = exports.MCD_CLIP_BAT_A = exports.MCD_CLIP_BAL_A = exports.MCD_CLIP_AAVE_A = exports.MCD_DOG = void 0;
-+exports.ALL_CLIPS = exports.MCD_DOG = exports.MCD_CLIP_VLX_A = exports.MCD_CLIP_WAG_A = void 0;
++exports.ALL_CLIPS = exports.MCD_DOG = exports.MCD_CLIP_VLX_A = exports.MCD_CLIP_WAG_A = exports.MCD_CLIP_VDGT_A = exports.MCD_CLIP_WBTC_A = void 0;
 +
  var MCD_DOG = 'MCD_DOG';
  exports.MCD_DOG = MCD_DOG;
@@ -418,8 +428,14 @@ index b58a551..e12de99 100644
 -exports.MCD_CLIP_RENBTC_A = MCD_CLIP_RENBTC_A;
 -var MCD_CLIP_UNI_A = 'MCD_CLIP_UNI_A';
 -exports.MCD_CLIP_UNI_A = MCD_CLIP_UNI_A;
--var MCD_CLIP_WBTC_A = 'MCD_CLIP_WBTC_A';
--exports.MCD_CLIP_WBTC_A = MCD_CLIP_WBTC_A;
++var MCD_CLIP_VLX_A = 'MCD_CLIP_VLX_A';
++exports.MCD_CLIP_VLX_A = MCD_CLIP_VLX_A;
++var MCD_CLIP_WAG_A = 'MCD_CLIP_WAG_A';
++exports.MCD_CLIP_WAG_A = MCD_CLIP_WAG_A;
++var MCD_CLIP_VDGT_A = 'MCD_CLIP_VDGT_A';
++exports.MCD_CLIP_VDGT_A = MCD_CLIP_VDGT_A;
+ var MCD_CLIP_WBTC_A = 'MCD_CLIP_WBTC_A';
+ exports.MCD_CLIP_WBTC_A = MCD_CLIP_WBTC_A;
 -var MCD_CLIP_YFI_A = 'MCD_CLIP_YFI_A';
 -exports.MCD_CLIP_YFI_A = MCD_CLIP_YFI_A;
 -var MCD_CLIP_ZRX_A = 'MCD_CLIP_ZRX_A';
@@ -457,12 +473,8 @@ index b58a551..e12de99 100644
 -var MCD_CLIP_USDT_A = 'MCD_CLIP_USDT_A';
 -exports.MCD_CLIP_USDT_A = MCD_CLIP_USDT_A;
 -var ALL_CLIPS = [MCD_CLIP_AAVE_A, MCD_CLIP_BAL_A, MCD_CLIP_BAT_A, MCD_CLIP_COMP_A, MCD_CLIP_ETH_A, MCD_CLIP_ETH_B, MCD_CLIP_ETH_C, MCD_CLIP_KNC_A, MCD_CLIP_LINK_A, MCD_CLIP_LRC_A, MCD_CLIP_MANA_A, MCD_CLIP_RENBTC_A, MCD_CLIP_UNI_A, MCD_CLIP_WBTC_A, MCD_CLIP_YFI_A, MCD_CLIP_ZRX_A, MCD_CLIP_UNIV2DAIETH_A, MCD_CLIP_UNIV2USDCETH_A, MCD_CLIP_UNIV2ETHUSDT_A, MCD_CLIP_UNIV2WBTCDAI_A, MCD_CLIP_UNIV2WBTCETH_A, MCD_CLIP_UNIV2LINKETH_A, MCD_CLIP_UNIV2UNIETH_A, MCD_CLIP_UNIV2AAVEETH_A, MCD_CLIP_UNIV2DAIUSDT_A, MCD_CLIP_UNIV2DAIUSDC_A, MCD_CLIP_USDC_A, MCD_CLIP_USDC_B, MCD_CLIP_TUSD_A, MCD_CLIP_PAXUSD_A, MCD_CLIP_GUSD_A, MCD_CLIP_USDT_A];
-+var MCD_CLIP_VLX_A = 'MCD_CLIP_VLX_A';
-+exports.MCD_CLIP_VLX_A = MCD_CLIP_VLX_A;
-+var MCD_CLIP_WAG_A = 'MCD_CLIP_WAG_A';
-+exports.MCD_CLIP_WAG_A = MCD_CLIP_WAG_A;
 +
-+var ALL_CLIPS = [MCD_CLIP_VLX_A, MCD_CLIP_WAG_A];
++var ALL_CLIPS = [MCD_CLIP_VLX_A, MCD_CLIP_WAG_A, MCD_CLIP_VDGT_A, MCD_CLIP_WBTC_A];
  exports.ALL_CLIPS = ALL_CLIPS;
 \ No newline at end of file
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/tracksTransactions.js b/node_modules/@makerdao/dai-plugin-liquidations/dist/utils/tracksTransactions.js
@@ -555,10 +567,10 @@ index e555efd..5ea7190 100644
      try {
        contractAddresses.testnet = require('../contracts/addresses/testnet.json');
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/src/utils/constants.js b/node_modules/@makerdao/dai-plugin-liquidations/src/utils/constants.js
-index 0a21a1e..01802ab 100644
+index 0a21a1e..3913c63 100644
 --- a/node_modules/@makerdao/dai-plugin-liquidations/src/utils/constants.js
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/src/utils/constants.js
-@@ -1,68 +1,8 @@
+@@ -1,68 +1,12 @@
  export const MCD_DOG = 'MCD_DOG';
 -export const MCD_CLIP_AAVE_A = 'MCD_CLIP_AAVE_A';
 -export const MCD_CLIP_BAL_A = 'MCD_CLIP_BAL_A';
@@ -573,7 +585,10 @@ index 0a21a1e..01802ab 100644
 -export const MCD_CLIP_MANA_A = 'MCD_CLIP_MANA_A';
 -export const MCD_CLIP_RENBTC_A = 'MCD_CLIP_RENBTC_A';
 -export const MCD_CLIP_UNI_A = 'MCD_CLIP_UNI_A';
--export const MCD_CLIP_WBTC_A = 'MCD_CLIP_WBTC_A';
++export const MCD_CLIP_VLX_A = 'MCD_CLIP_VLX_A';
++export const MCD_CLIP_WAG_A = 'MCD_CLIP_WAG_A';
++export const MCD_CLIP_VDGT_A = 'MCD_CLIP_VDGT_A';
+ export const MCD_CLIP_WBTC_A = 'MCD_CLIP_WBTC_A';
 -export const MCD_CLIP_YFI_A = 'MCD_CLIP_YFI_A';
 -export const MCD_CLIP_ZRX_A = 'MCD_CLIP_ZRX_A';
 -export const MCD_CLIP_UNIV2DAIETH_A = 'MCD_CLIP_UNIV2DAIETH_A';
@@ -592,8 +607,6 @@ index 0a21a1e..01802ab 100644
 -export const MCD_CLIP_PAXUSD_A = 'MCD_CLIP_PAXUSD_A';
 -export const MCD_CLIP_GUSD_A = 'MCD_CLIP_GUSD_A';
 -export const MCD_CLIP_USDT_A = 'MCD_CLIP_USDT_A';
-+export const MCD_CLIP_VLX_A = 'MCD_CLIP_VLX_A';
-+export const MCD_CLIP_WAG_A = 'MCD_CLIP_WAG_A';
  
  export const ALL_CLIPS = [
 -  MCD_CLIP_AAVE_A,
@@ -629,7 +642,9 @@ index 0a21a1e..01802ab 100644
 -  MCD_CLIP_GUSD_A,
 -  MCD_CLIP_USDT_A
 +  MCD_CLIP_VLX_A,
-+  MCD_CLIP_WAG_A
++  MCD_CLIP_WAG_A,
++  MCD_CLIP_VDGT_A,
++  MCD_CLIP_WBTC_A
  ];
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/src/utils/tracksTransactions.js b/node_modules/@makerdao/dai-plugin-liquidations/src/utils/tracksTransactions.js
 index c78c024..cc0101c 100644

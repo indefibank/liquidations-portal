@@ -39,14 +39,14 @@ index 0000000..4663b08
 +}
 diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
 new file mode 100644
-index 0000000..935e703
+index 0000000..3f9fdd5
 --- /dev/null
 +++ b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
 @@ -0,0 +1,5 @@
 +{
-+  "PROXY_REGISTRY": "0xa80814d1A77327598956a36094A6e2D60c41153F",
-+  "DS_PROXY_FACTORY": "0x254803260dA2F24091786AD6b7Fff10f83CF3D71",
-+  "MULTICALL": "0x5AA93Be17F44c6eFe2F12a7c085a0737318d0f21"
++  "PROXY_REGISTRY": "0x679a616b2A804D4Ac2612739507a93e7fa56173b",
++  "DS_PROXY_FACTORY": "0x47870Bd8E79d5b96D5cD47A57CC700dbf53b062d",
++  "MULTICALL": "0x8Eb723565eB05da4eBD1B5fB347b0cE679Bf3B67"
 +}
 diff --git a/node_modules/@makerdao/dai/dist/contracts/networks.js b/node_modules/@makerdao/dai/dist/contracts/networks.js
 index 1c7c7a3..fdf9804 100644
