@@ -53,17 +53,17 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     colorIconName: 'ethCircleColor',
     decimals: 18
   },
-  'VDGT-A': {
-    name: 'Velas',
-    ilk: 'VDGT-A',
-    symbol: 'VDGT',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/vdgt-card-texture.png',
-    bannerPng: '/assets/vdgt-banner-texture.png',
-    iconSvg: '/assets/vdgt-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
+  // 'VDGT-A': {
+  //   name: 'Velas',
+  //   ilk: 'VDGT-A',
+  //   symbol: 'VDGT',
+  //   bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+  //   cardTexturePng: '/assets/vdgt-card-texture.png',
+  //   bannerPng: '/assets/vdgt-banner-texture.png',
+  //   iconSvg: '/assets/vdgt-icon.svg',
+  //   colorIconName: 'ethCircleColor',
+  //   decimals: 18
+  // },
   'WBTC-A': {
     name: 'Wrapped Bitcoin',
     ilk: 'WBTC-A',
