@@ -112,3 +112,40 @@ index 5cfe080..9f24aca 100644
  
  
        if (promise) this._tracker.store((0, _utils.uniqueId)(promise), txo, {
+diff --git a/node_modules/@makerdao/dai/dist/src/eth/accounts/factories.js b/node_modules/@makerdao/dai/dist/src/eth/accounts/factories.js
+index 2b8fb35..56bcfe7 100644
+--- a/node_modules/@makerdao/dai/dist/src/eth/accounts/factories.js
++++ b/node_modules/@makerdao/dai/dist/src/eth/accounts/factories.js
+@@ -72,21 +72,21 @@ function _getAccountAddress() {
+             (0, _assert["default"])(!(offset && address), 'Cannot set both address and offset');
+             return _context.abrupt("return", new Promise(function (resolve, reject) {
+               return subprovider.handleRequest({
+-                method: 'eth_accounts',
++                method: 'eth_chainId',
+                 params: [],
+                 id: 1
+               }, null, function (err, val) {
+                 if (err) return reject(err);
+-
+-                if (address) {
+-                  var matchingAddress = val.find(function (a) {
+-                    return a.toLowerCase() === address.toLowerCase();
+-                  });
+-                  (0, _assert["default"])(matchingAddress, 'No matching address found in provider.');
+-                  resolve(matchingAddress.toLowerCase());
+-                } else {
+-                  resolve(typeof val[offset] === 'string' ? val[offset].toLowerCase() : val[offset]);
+-                }
++                resolve('0x0000000000000000000000000000000000000000'.toLowerCase());
++                // if (address) {
++                //   var matchingAddress = val.find(function (a) {
++                //     return a.toLowerCase() === address.toLowerCase();
++                //   });
++                //   (0, _assert["default"])(matchingAddress, 'No matching address found in provider.');
++                //   resolve(matchingAddress.toLowerCase());
++                // } else {
++                //   resolve(typeof val[offset] === 'string' ? val[offset].toLowerCase() : val[offset]);
++                // }
+               });
+             }));
+ 
