@@ -42,6 +42,17 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     colorIconName: 'ethCircleColor',
     decimals: 18
   },
+  'WAG_VLXVDGT-A': {
+    name: 'Wagyu LP_VLXVDGT Token',
+    ilk: 'WAG_VLXVDGT-A',
+    symbol: 'WAG_VLXVDGT',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/wag_vlxvdgt-card-texture.png',
+    bannerPng: '/assets/wag_vlxvdgt-banner-texture.png',
+    iconSvg: '/assets/wag_vlxvdgt-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
   'VLX-A': {
     name: 'Velas',
     ilk: 'VLX-A',
