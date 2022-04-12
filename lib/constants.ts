@@ -44,14 +44,19 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
   },
   'WAG_VLXVDGT-A': {
     name: 'Wagyu LP_VLXVDGT Token',
+    pool: 'VLX-VDGT',
     ilk: 'WAG_VLXVDGT-A',
     symbol: 'WAG_VLXVDGT',
     bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
     cardTexturePng: '/assets/wag_vlxvdgt-card-texture.png',
     bannerPng: '/assets/wag_vlxvdgt-banner-texture.png',
     iconSvg: '/assets/wag_vlxvdgt-icon.svg',
+    poolSvg: '/assets/wag_vlxvdgt-icon.svg',
     colorIconName: 'ethCircleColor',
-    decimals: 18
+    decimals: 18,
+    lpToken: true,
+    protocol: 'Wagyu',
+    protocolSvg: '/assets/wag-icon.svg'
   },
   'VLX-A': {
     name: 'Velas',
