@@ -219,6 +219,8 @@ export function bigNumToFormat(value: BigNumber, ilk: string): string {
   switch (ilk) {
     case 'USDV':
       return value.toFormat(2);
+    case 'VDGT':
+      return value.toFormat(4);
     default:
       return cur.bigNumFormatter(value);
   }

@@ -8,3 +8,4 @@ export { useSystemStatsSidebar } from './useSystemStats';
 export { useGlobalMax } from './useGlobalMax';
 export { useUnsafeVaults } from './useUnsafeVaults';
 export { useVatGemBalance } from './useVatGemBalance';
+export { useAccountVdgtBalance } from './useAccountVdgtBalance';

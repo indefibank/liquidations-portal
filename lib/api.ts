@@ -44,8 +44,12 @@ export async function getVatGemBalance(ilk?: string, address?: string): Promise<
 
 export async function getAccountVatBalance(address?: string): Promise<any> {
   const maker = await getMaker();
-  console.log(`vat.usdv(address) ${maker.service('smartContract').getContract('MCD_VAT').usdv(address)}`);
   return maker.service('smartContract').getContract('MCD_VAT').usdv(address);
+}
+
+export async function getAccountVdgtBalance(address?: string): Promise<any> {
+  const maker = await getMaker();
+  return maker.service('smartContract').getContract('MCD_GOV').balanceOf(address);
 }
 
 export async function getAccountTokenBalance(token: string, address?: string): Promise<any> {

@@ -155,7 +155,7 @@ index 371af36..0000000
 -}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
 new file mode 100644
-index 0000000..1fc7414
+index 0000000..0d6ab30
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velas.json
 @@ -0,0 +1,17 @@
@@ -165,39 +165,41 @@ index 0000000..1fc7414
 +  "MCD_ESM": "0x63aCA4a3FF50AF881566113552Ac7f87c221C09D",
 +  "ILK_REGISTRY": "0x6E2faD71Bb6a6cA86D204f1EbbB152855A9295dF",
 +  "CLIPPER_MOM": "0xBD4B941e9D68b5DFb984efcFd78AbAf2eA5da45F",
-+  "MCD_CLIP_VLX_A": "0x7E7dcd51167f02e240f738c1E81e93A1eDB16233",
++  "MCD_CLIP_VLX_A": "0xec1991f4E2D9f2b17f86dc94dF685a68aa3DDC43",
 +  "MCD_CLIP_CALC_VLX_A": "0xa2fCdEa108cE4BE575610020A929B3E8294739ac",
-+  "MCD_CLIP_WAG_A": "0x35a5CC1670Ec38B1a310eE2C97C0BC469151a3a3",
++  "MCD_CLIP_WAG_A": "0x8E86C4B89C0a166311ba692cB8Ee4964b49e2CB0",
 +  "MCD_CLIP_CALC_WAG_A": "0xeFF499aE6860687037FaE9EA1B53B973F7C2Ddf7",
-+  "MCD_CLIP_WBTC_A": "0xabc2DbECB28B220fa1a70393519A473Af4A5A553",
++  "MCD_CLIP_WBTC_A": "0x909a3d8D40EC425b8f0c9DECa44b70Db931C4c53",
 +  "MCD_CLIP_CALC_WBTC_A": "0x60A1AF92B1e96b637FCedcc6b2716e78faB95764",
 +  "MCD_CLIP_VDGT_A": "0xFB065FA2b9Eb9f432F134b5610efFae632F17563",
 +  "MCD_CLIP_CALC_VDGT_A": "0x97ecBC8E9cC2fFBFE083A626853e116b08D8AF4a",
-+  "MCD_CLIP_WAG_VLXVDGT_A": "0x4FE6A5b19C1f591Ddced2C0ea616dBb8E4Ca32ef",
++  "MCD_CLIP_WAG_VLXVDGT_A": "0x39a94666a55408Af598CeD059E7E805751472821",
 +  "MCD_CLIP_CALC_WAG_VLXVDGT_A": "0x37Adc6EE245ed53ad755B30d25911EC2647F6CE8"
 +}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
 new file mode 100644
-index 0000000..15d75ee
+index 0000000..52f1723
 --- /dev/null
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/contracts/addresses/velastestnet.json
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,19 @@
 +{
 +  "MCD_DOG": "0x5D45Fb492270781d8744c8394d7C8B56Ea03860F",
 +  "MCD_END": "0xF73b59012050e90af32A7e0caC469402354F587F",
 +  "MCD_ESM": "0x133e9bF20B035e1061001b3e9D60AD5f55F85545",
 +  "ILK_REGISTRY": "0x240C0fDCc37BA59B9ea057e55a0fa9E85C51BbFE",
 +  "CLIPPER_MOM": "0x43d8e00BBe384a2A8CD393fAa6BFFE4C8Fb030ef",
-+  "MCD_CLIP_VLX_A": "0x0F09d02D0510d7724c9CfB39adF9C0A9842bAb08",
++  "MCD_CLIP_VLX_A": "0xBA285a5483C4754e640bD86460383b914305810A",
 +  "MCD_CLIP_CALC_VLX_A": "0xD6e0b48E8377D71157CEdA6aF34338A67D61b7dD",
-+  "MCD_CLIP_WAG_A": "0x844732956Be42610fD05F4BBC270A0434BFc75E0",
++  "MCD_CLIP_WAG_A": "0xc2c24e7E519b0AE0989503840da613aF05A168d6",
 +  "MCD_CLIP_CALC_WAG_A": "0x878aa2a43987C1811fD054ba27f022D615B66230",
 +  "MCD_CLIP_VDGT_A": "0x7D36e24dE1e9a323f58490a775D964f86D498970",
 +  "MCD_CLIP_CALC_VDGT_A": "0xB9Ba44dc352e84c9329858a737A11888cF7D60f9",
-+  "MCD_CLIP_WBTC_A": "0x0A136ED5fAbe9eD2871E85B1D07C5f648eAe08D0",
++  "MCD_CLIP_WBTC_A": "0x1171f6214aa3FE60c58e1CC50ec9fd5cF27b6A2B",
 +  "MCD_CLIP_CALC_WBTC_A": "0x1FB7F7C4d84DD148d4149FC1E56f495D14C909D1",
-+  "MCD_CLIP_WAG_VLXVDGT_A": "0x4FE6A5b19C1f591Ddced2C0ea616dBb8E4Ca32ef",
-+  "MCD_CLIP_CALC_WAG_VLXVDGT_A": "0x37Adc6EE245ed53ad755B30d25911EC2647F6CE8"
++  "MCD_CLIP_WAG_VLXVDGT_A": "0x47cb2555461570059C237022234bA303b28F6767",
++  "MCD_CLIP_CALC_WAG_VLXVDGT_A": "0x37Adc6EE245ed53ad755B30d25911EC2647F6CE8",
++  "MCD_CLIP_WAGYULPVLXVDGT_A": "0x47cb2555461570059C237022234bA303b28F6767",
++  "MCD_CLIP_CALC_WAGYULPVLXVDGT_A": "0x6Bfc09F0D5AB90caF18F181Ac68d2F086Cb4d9Cd"
 +}
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json b/node_modules/@makerdao/dai-plugin-liquidations/contracts/contract-info.json
 index 8e448e0..6b5b6b7 100644
@@ -226,7 +228,7 @@ index 8e448e0..6b5b6b7 100644
      "events": {
        "exec": "0x168ccd6700000000000000000000000000000000000000000000000000000000",
 diff --git a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js b/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
-index f183561..dae5810 100644
+index f183561..d26ab13 100644
 --- a/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
 +++ b/node_modules/@makerdao/dai-plugin-liquidations/dist/LiquidationService.js
 @@ -41,8 +41,9 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
@@ -355,7 +357,25 @@ index f183561..dae5810 100644
          return _regenerator["default"].wrap(function _callee20$(_context20) {
            while (1) {
              switch (_context20.prev = _context20.next) {
-@@ -942,9 +952,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -868,10 +878,13 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+                 address = this.get('web3').currentAddress();
+                 amt = (0, _bignumber["default"])(amount).times(WAD).toFixed();
+                 _context20.next = 5;
+-                return this._joinGemAdapter(ilk).exit(address, amt, {
+-                  promise: promise
+-                });
+-
++                try {
++                  return this._joinGemAdapter(ilk).exit(address, amt, {
++                    promise: promise
++                  });
++                } catch (e) {
++                  console.error(e);
++                }
+               case 5:
+                 return _context20.abrupt("return", _context20.sent);
+ 
+@@ -942,9 +955,9 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
        return this.get('smartContract').getContractByName('MCD_DOG');
      }
    }, {
@@ -368,7 +388,7 @@ index f183561..dae5810 100644
      }
    }, {
      key: "_joinGemAdapter",
-@@ -954,5 +964,5 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
+@@ -954,5 +967,5 @@ var LiquidationService = (_class = /*#__PURE__*/function (_PublicService) {
      }
    }]);
    return LiquidationService;

@@ -22,7 +22,7 @@ import { Icon } from '@makerdao/dai-ui-icons';
 
 import { COLLATERAL_ARRAY, COLLATERAL_MAP } from 'lib/constants';
 import { getNetwork } from 'lib/maker';
-import { useAuctions, useAccountVatBalance } from 'lib/hooks';
+import { useAuctions, useAccountVatBalance, useAccountVdgtBalance } from 'lib/hooks';
 import { bigNumToFormat } from 'lib/utils';
 import { useModalsStore } from 'stores/modals';
 import useAccountsStore from 'stores/accounts';
@@ -42,6 +42,10 @@ const Header = (): JSX.Element => {
   const address = account?.address;
   const initApprovals = useApprovalsStore(state => state.initApprovals);
   const { data: vatBalance = new BigNumber(0) } = useAccountVatBalance(address);
+  const { data: vdgtBalance = new BigNumber(0) } = useAccountVdgtBalance(address);
+
+  console.log(`vdgt balance: ${vdgtBalance}`);
+  console.log(`usdv in vat balance: ${vatBalance}`);
 
   useEffect(() => {
     if (!address) return;
@@ -116,7 +120,14 @@ const Header = (): JSX.Element => {
                     : '0';
                   return (
                     <MenuItem key={index} onSelect={() => router.push(`/auctions/${type.key}`)}>
-                      <Flex sx={{ justifyContent: 'space-between', py: 1, cursor: 'pointer', fontSize: 2 }}>
+                      <Flex
+                        sx={{
+                          justifyContent: 'space-between',
+                          py: 1,
+                          cursor: 'pointer',
+                          fontSize: 2
+                        }}
+                      >
                         <Text>{type.key.toUpperCase()}</Text>
                         <Text sx={{ color: 'textSecondary' }}>{numberOfAuctions}</Text>
                       </Flex>
@@ -141,32 +152,57 @@ const Header = (): JSX.Element => {
           {/*</Link>*/}
 
           {address && (
-            <Button
-              aria-label="Deposit or Withdraw Usdv"
-              sx={{
-                variant: 'buttons.card',
-                borderRadius: 'round',
-                color: 'textMuted',
-                px: [2, 2, 3],
-                py: 2,
-                ml: [2, 2, 4],
-                alignSelf: 'flex-end',
-                '&:hover': {
-                  color: 'text',
-                  borderColor: 'onSecondary',
-                  backgroundColor: 'white'
-                }
-              }}
-              onClick={toggleDepositWithdraw}
-            >
-              <Flex sx={{ alignItems: 'center' }}>
-                <Text>{bigNumToFormat(vatBalance, 'USDV')} </Text>
-                {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
-                {/*<Icon name="usdv" size="16px" sx={{ mx: [0, 2] }} />*/}
-                <Text sx={{ display: ['none', 'block'] }}>USDV Deposit/Withdraw</Text>
-              </Flex>
-            </Button>
+            <Flex sx={{ alignItems: 'center' }}>
+              <Button
+                aria-label="Deposit or Withdraw Usdv"
+                sx={{
+                  variant: 'buttons.card',
+                  borderRadius: 'round',
+                  color: 'textMuted',
+                  px: [2, 2, 3],
+                  py: 2,
+                  ml: [2, 2, 4],
+                  alignSelf: 'flex-end',
+                  '&:hover': {
+                    color: 'text',
+                    borderColor: 'onSecondary',
+                    backgroundColor: 'white'
+                  }
+                }}
+                onClick={toggleDepositWithdraw}
+              >
+                <Flex sx={{ alignItems: 'center' }}>
+                  <Text>{bigNumToFormat(vatBalance, 'USDV')} </Text>
+                  {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
+                  {/*<Icon name="usdv" size="16px" sx={{ mx: [0, 2] }} />*/}
+                  <Text sx={{ display: ['none', 'block'] }}>USDV Deposit/Withdraw</Text>
+                </Flex>
+              </Button>
+            </Flex>
           )}
+
+          <Button
+            aria-label="VDGT balance"
+            sx={{
+              variant: 'buttons.card',
+              borderRadius: 'round',
+              color: 'textMuted',
+              px: [2, 2, 3],
+              py: 2,
+              ml: [2, 2, 4],
+              alignSelf: 'flex-end',
+              '&:hover': {
+                color: 'text',
+                borderColor: 'onSecondary',
+                backgroundColor: 'white'
+              }
+            }}
+          >
+            <Flex sx={{ alignItems: 'center' }}>
+              <Text>{bigNumToFormat(vdgtBalance, 'VDGT')} </Text>
+              <Text sx={{ display: ['none', 'block'] }}>VDGT</Text>
+            </Flex>
+          </Button>
 
           <AccountSelect sx={{ ml: [1, 2, 4] }} />
 

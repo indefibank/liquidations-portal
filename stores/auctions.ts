@@ -1,6 +1,7 @@
 import create from 'zustand';
 import getMaker from '../lib/maker';
 import { transactionsApi } from './transactions';
+import BigNumber from 'bignumber.js';
 
 type Store = {
   submitBid: (ilk, id, amount, maxPrice, address) => Promise<void>;
@@ -17,10 +18,12 @@ const [useAuctionStore] = create<Store>((set, get) => ({
   resetBidState: () => set(state => ({ bidTxSuccess: false, bidTxPending: false, bidTxError: null })),
   submitBid: async (ilk, id, amount, maxPrice, address) => {
     const maker = await getMaker();
+    const delta = new BigNumber(100);
+    const _maxPrice = maxPrice.plus(delta).toFixed(18);
 
     // maxPrice is approximate, or else we get "Clipper/too-expensive" errors
     const txCreator = () =>
-      maker.service('liquidation').take(ilk, id, amount.toFixed(18), maxPrice.toFixed(27), address);
+      maker.service('liquidation').take(ilk, id, amount.toFixed(18), _maxPrice, address);
     await transactionsApi.getState().track(txCreator, `Submit bid on ID: ${id}`, {
       pending: () => {
         set({
