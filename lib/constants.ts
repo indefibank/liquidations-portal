@@ -42,6 +42,28 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     colorIconName: 'ethCircleColor',
     decimals: 18
   },
+  'ASTRO-A': {
+    name: 'Astro Swap Token',
+    ilk: 'ASTRO-A',
+    symbol: 'ASTRO',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/astro-card-texture.png',
+    bannerPng: '/assets/astro-banner-texture.png',
+    iconSvg: '/assets/astro-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
+  'BUSD-A': {
+    name: 'Binance USD',
+    ilk: 'BUSD-A',
+    symbol: 'BUSD',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/busd-card-texture.png',
+    bannerPng: '/assets/busd-banner-texture.png',
+    iconSvg: '/assets/busd-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
   'WAG_VLXVDGT-A': {
     name: 'Wagyu LP_VLXVDGT Token',
     pool: 'VLX-VDGT',
