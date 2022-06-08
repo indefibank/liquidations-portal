@@ -64,6 +64,39 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     colorIconName: 'ethCircleColor',
     decimals: 18
   },
+  'BNB-A': {
+    name: 'Binance Coin',
+    ilk: 'BNB-A',
+    symbol: 'BNB',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/bnb-card-texture.png',
+    bannerPng: '/assets/bnb-banner-texture.png',
+    iconSvg: '/assets/bnb-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
+  'FTM-A': {
+    name: 'Fantom Coin',
+    ilk: 'FTM-A',
+    symbol: 'FTM',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/ftm-card-texture.png',
+    bannerPng: '/assets/ftm-banner-texture.png',
+    iconSvg: '/assets/ftm-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
+  'MATIC-A': {
+    name: 'Polygon Coin',
+    ilk: 'MATIC-A',
+    symbol: 'MATIC',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+    cardTexturePng: '/assets/matic-card-texture.png',
+    bannerPng: '/assets/matic-banner-texture.png',
+    iconSvg: '/assets/matic-icon.svg',
+    colorIconName: 'ethCircleColor',
+    decimals: 18
+  },
   'WAG_VLXVDGT-A': {
     name: 'Wagyu LP_VLXVDGT Token',
     pool: 'VLX-VDGT',
