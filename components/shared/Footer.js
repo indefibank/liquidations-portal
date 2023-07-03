@@ -234,7 +234,7 @@ class LongFooter extends React.Component {
             <LinkListHeader>{t('Products')}</LinkListHeader>
             <LinkList>
               <li>
-                <Link to="https://vaults.velero.finance/">{t('Vaults')}</Link>
+                <Link to="https://indefibank.com/">{t('Vaults')}</Link>
               </li>
               {/*<li>*/}
               {/*  <Link to={'https://migrate.makerdao.com/'}>{t('Migrate')}</Link>*/}
@@ -243,7 +243,7 @@ class LongFooter extends React.Component {
               {/*  <Link to={'https://makerdao.com/en/ecosystem/'}>{t('Ecosystem')}</Link>*/}
               {/*</li>*/}
               <li>
-                <Link to="https://governance.velero.finance/">{t('Governance')}</Link>
+                <Link to="https://indefibank.com">{t('Governance')}</Link>
               </li>
             </LinkList>
           </div>
@@ -320,16 +320,16 @@ class LongFooter extends React.Component {
             {/*</Flex>*/}
             <LinkListHeader>{t('Social Links')}</LinkListHeader>
             <Icons gap="20px" mt="1.8rem" columns="repeat(7, 20px)">
-              <Link to="https://twitter.com/VeleroDAO">
+              <Link to="https://indefibank.com">
                 <Icon name="twitter" />
               </Link>
-              {/*<Link to="https://github.com/velerofinance/">*/}
+              {/*<Link to="https://indefibank.com">*/}
               {/*  <Icon name="github" />*/}
               {/*</Link>*/}
               {/*<Link to="https://www.reddit.com/r/MakerDAO/">*/}
               {/*  <Icon name="reddit" />*/}
               {/*</Link>*/}
-              <Link to="https://t.me/velerodao">
+              <Link to="https://indefibank.com">
                 <Icon name="telegram" />
               </Link>
               {/*<Link to="https://chat.makerdao.com/">*/}

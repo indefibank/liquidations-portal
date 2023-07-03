@@ -1,5 +1,5 @@
 import Maker from '@makerdao/dai';
-import McdPlugin, { USDV } from '@makerdao/dai-plugin-mcd';
+import McdPlugin, { STBL } from '@makerdao/dai-plugin-mcd';
 import LedgerPlugin from '@makerdao/dai-plugin-ledger-web';
 import TrezorPlugin from '@makerdao/dai-plugin-trezor-web';
 import { Web3ReactPlugin } from './maker/web3react';
@@ -8,15 +8,17 @@ import LiquidationPlugin from '@makerdao/dai-plugin-liquidations';
 import { SupportedNetworks, DEFAULT_NETWORK } from './constants';
 import { networkToRpc } from './maker/network';
 
-export const VLX = Maker.VLX;
+export const COIN = Maker.COIN;
 export const USD = Maker.USD;
 
 function chainIdToNetworkName(chainId: number): SupportedNetworks {
   switch (chainId) {
-    case 106:
-      return SupportedNetworks.VELAS;
-    case 111:
-      return SupportedNetworks.VELASTESTNET;
+    case 1:
+      return SupportedNetworks.MAINNET;
+    case 80001:
+      return SupportedNetworks.MUMBAI;
+    case 137:
+      return SupportedNetworks.POLYGON;
     case 999:
       return SupportedNetworks.TESTNET;
     default:
@@ -36,10 +38,12 @@ function determineNetwork(): SupportedNetworks {
   } else {
     // otherwise, to determine the network...
     // 1) check the URL
-    if (window.location.search.includes('velastestnet')) {
-      return SupportedNetworks.VELASTESTNET;
-    } else if (window.location.search.includes('velas')) {
-      return SupportedNetworks.VELAS;
+    if (window.location.search.includes('mainnet')) {
+      return SupportedNetworks.MAINNET;
+    } else if (window.location.search.includes('mumbai')) {
+      return SupportedNetworks.MUMBAI;
+    } else if (window.location.search.includes('polygon')) {
+      return SupportedNetworks.POLYGON;
     } else if (window.location.search.includes('testnet')) {
       return SupportedNetworks.TESTNET;
     }
@@ -148,7 +152,7 @@ async function personalSign(message) {
 
 export default getMaker;
 export {
-  USDV,
+  STBL,
   getNetwork,
   isDefaultNetwork,
   isSupportedNetwork,

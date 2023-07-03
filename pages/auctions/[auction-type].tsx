@@ -89,17 +89,20 @@ export default function Auctions(): JSX.Element | null {
     const maker = await getMaker();
     const amt = await maker
       .service('smartContract')
-      .getContractByName('VLX')
+      .getContractByName(`${process.env.COIN_NAME}`)
       .wrappedContract.balanceOf(address);
     const txCreator = () =>
-      maker.service('smartContract').getContractByName('VLX').wrappedContract.withdraw(amt);
+      maker
+        .service('smartContract')
+        .getContractByName(`${process.env.COIN_NAME}`)
+        .wrappedContract.withdraw(amt);
 
-    await transactionsApi.getState().track(txCreator, `Unwrapped ${amt} VLX`, {
+    await transactionsApi.getState().track(txCreator, `Unwrapped ${amt} ${process.env.COIN_NAME}`, {
       pending: () => {
         setIsTxProcessing(true);
       },
       mined: txId => {
-        transactionsApi.getState().setMessage(txId, `Success unwrapped ${amt} VLX`);
+        transactionsApi.getState().setMessage(txId, `Success unwrapped ${amt} ${process.env.COIN_NAME}`);
         setIsTxProcessing(false);
       },
       error: () => {
@@ -111,7 +114,7 @@ export default function Auctions(): JSX.Element | null {
   return (
     <div>
       <Head>
-        <title>Velero Liquidations Portal - Auctions</title>
+        <title>{`${process.env.COMPANY_NAME} Liquidations Portal - Auctions`}</title>
       </Head>
 
       {/* full width banner image */}
@@ -214,7 +217,7 @@ export default function Auctions(): JSX.Element | null {
                         </Text>
                       </Button>
                     )}
-                    {['VLX-A'].includes(ilk) && (
+                    {[`${process.env.COIN_NAME}-A`].includes(ilk) && (
                       <Button
                         sx={{
                           variant: 'buttons.card',
@@ -228,7 +231,9 @@ export default function Auctions(): JSX.Element | null {
                         onClick={() => unwrap(account?.address)}
                         disabled={isTxProcessing}
                       >
-                        <Text sx={{ fontSize: 2, color: 'textMuted', px: 2 }}>unwrap VLX</Text>
+                        <Text
+                          sx={{ fontSize: 2, color: 'textMuted', px: 2 }}
+                        >{`unwrap ${process.env.COIN_NAME}`}</Text>
                       </Button>
                     )}
                   </div>

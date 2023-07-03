@@ -97,7 +97,7 @@ const AccountBox = ({ address, accountName, change }: Props): JSX.Element => {
             }
           }}
         >
-          View on VelasExplorer
+          View on BlockExplorer
           <Icon name="arrowTopRight" size={2} sx={{ ml: 1 }} />
         </ExternalLink>
       </Flex>

@@ -112,13 +112,13 @@ const BidModal = ({
     return (
       <Flex sx={{ flexDirection: 'column' }}>
         <Flex sx={{ justifyContent: 'space-between', my: 3 }}>
-          <Tooltip sx={{ padding: 3, maxWidth: 360, whiteSpace: 'normal' }} label={TOOLTIP_DICT.USDV_IN_VAT}>
-            <Text sx={{ fontWeight: 'semiBold' }}>USDV in the VAT</Text>
+          <Tooltip sx={{ padding: 3, maxWidth: 360, whiteSpace: 'normal' }} label={TOOLTIP_DICT.STBL_IN_VAT}>
+            <Text sx={{ fontWeight: 'semiBold' }}>{`${process.env.STBL_NAME} in the VAT`}</Text>
           </Tooltip>
-          <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
+          <Text>{bigNumToFormat(vatBalance, `${process.env.STBL_NAME}`)}</Text>
         </Flex>
         <Button variant="outline" onClick={handleDepositMore} sx={{ mb: 4 }}>
-          Deposit more USDV in the VAT
+          {`Deposit more ${process.env.STBL_NAME} in the VAT`}
         </Button>
         <Button
           onClick={() => enableIlkHope(ilk)}
@@ -127,15 +127,15 @@ const BidModal = ({
           disabled={ilkHopePending}
         >
           {!ilkHopePending ? (
-            `Authorize USDV in ${ilk} Auctions`
+            `Authorize ${process.env.STBL_NAME} in ${ilk} Auctions`
           ) : (
             <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
-              Authorizing USDV in {ilk} Auctions <Spinner size={20} ml={2} />
+              Authorizing {process.env.STBL_NAME} in {ilk} Auctions <Spinner size={20} ml={2} />
             </Flex>
           )}
         </Button>
         <Text sx={{ color: 'textSecondary', textAlign: 'center' }}>
-          To start bidding you need to authorize Usdv in {ilk} Auctions
+          To start bidding you need to authorize {process.env.STBL_NAME} in {ilk} Auctions
         </Text>
       </Flex>
     );
@@ -188,7 +188,7 @@ const BidModal = ({
               fontSize: 2
             }}
           >
-            View on evmexplorer.velas.com <Icon name="arrowTopRight" size="2" color="accentBlue" />
+            View on {process.env.EXPLORER} <Icon name="arrowTopRight" size="2" color="accentBlue" />
           </Text>
         </ExternalLink>
         <Button variant="primaryOutline" onClick={resetBidState} sx={{ width: '100%', mt: 4, mb: 2 }}>
@@ -243,7 +243,9 @@ const BidModal = ({
               <>
                 <Flex sx={{ flexDirection: 'column', mb: 2 }}>
                   <Flex sx={{ justifyContent: 'space-between', alignItems: 'flex-end', mb: 2 }}>
-                    <Text sx={{ fontWeight: 'semiBold', fontSize: 3 }}>USDV you pay</Text>
+                    <Text
+                      sx={{ fontWeight: 'semiBold', fontSize: 3 }}
+                    >{`${process.env.STBL_NAME} you pay`}</Text>
                     <Flex sx={{ flexDirection: 'column', alignItems: 'flex-end' }}>
                       <Button
                         variant="textual"
@@ -255,11 +257,13 @@ const BidModal = ({
                       <Flex sx={{ alignItems: 'center' }}>
                         <Tooltip
                           sx={{ padding: 3, maxWidth: 360, whiteSpace: 'normal' }}
-                          label={TOOLTIP_DICT.USDV_IN_VAT}
+                          label={TOOLTIP_DICT.STBL_IN_VAT}
                         >
-                          <Text sx={{ fontSize: 2, color: 'textSecondary' }}>USDV in the VAT:</Text>
+                          <Text sx={{ fontSize: 2, color: 'textSecondary' }}>
+                            {`${process.env.STBL_NAME} in the VAT`}:
+                          </Text>
                         </Tooltip>
-                        <Text sx={{ ml: 2 }}>{bigNumToFormat(vatBalance, 'USDV')}</Text>
+                        <Text sx={{ ml: 2 }}>{bigNumToFormat(vatBalance, `${process.env.STBL_NAME}`)}</Text>
                       </Flex>
                     </Flex>
                   </Flex>
@@ -305,9 +309,11 @@ const BidModal = ({
                         max
                       </Button>
                       <Flex sx={{ alignItems: 'center', ml: 1 }}>
-                        {/*<Icon size={30} name="usdv" />*/}
-                        {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
-                        <Text sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}> USDV</Text>
+                        {/*<Icon size={30} name="stbl" />*/}
+                        {/*<Image src={'Indefibank-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
+                        <Text
+                          sx={{ fontSize: 3, fontWeight: 'semiBold', ml: 2 }}
+                        >{` ${process.env.STBL_NAME}`}</Text>
                       </Flex>
                     </Flex>
                   </Flex>
@@ -319,7 +325,10 @@ const BidModal = ({
                       >
                         <Text sx={{ color: 'textSecondary', fontSize: 2 }}>Dust limit</Text>
                       </Tooltip>
-                      <Text sx={{ color: 'textMuted', fontSize: 2 }}>{dustLimit.toFormat(2)} USDV</Text>
+                      <Text sx={{ color: 'textMuted', fontSize: 2 }}>
+                        {dustLimit.toFormat(2)}
+                        {` ${process.env.STBL_NAME}`}
+                      </Text>
                     </Flex>
                     <Flex sx={{ flexDirection: 'column' }}>
                       <Tooltip
@@ -329,7 +338,7 @@ const BidModal = ({
                         <Text sx={{ color: 'textSecondary', fontSize: 2 }}>Auction price</Text>
                       </Tooltip>
                       <Text sx={{ color: 'textMuted', fontSize: 2, textAlign: 'right' }}>
-                        {auctionPrice.toFormat(2)} USDV
+                        {`${auctionPrice.toFormat(2)} ${process.env.STBL_NAME}`}
                       </Text>
                     </Flex>
                   </Flex>
@@ -348,10 +357,9 @@ const BidModal = ({
                   </Flex>
                   <Flex sx={{ justifyContent: 'space-between', mt: 2 }}>
                     <Text sx={{ ml: 2, fontSize: 2, color: 'textSecondary' }}>Price</Text>
-                    <Text sx={{ fontSize: 2, color: 'textMuted' }}>{`≈ ${bigNumToFormat(
-                      unitPrice,
-                      ilk
-                    )} USDV per ${symbol}`}</Text>
+                    <Text sx={{ fontSize: 2, color: 'textMuted' }}>{`≈ ${bigNumToFormat(unitPrice, ilk)} ${
+                      process.env.STBL_NAME
+                    } per ${symbol}`}</Text>
                   </Flex>
                 </Flex>
                 <Button
@@ -366,9 +374,11 @@ const BidModal = ({
                 {(insufficientFunds || dustLimitExceeded) && (
                   <Text sx={{ color: 'onWarning', textAlign: 'center', mt: 2 }}>
                     {dustLimitExceeded
-                      ? `Please bid the full amount or any amount lower than ${dustLimitAllowance} USDV. It is not permitted to leave less than the dust limit of ${dustLimit.toFormat(
+                      ? `Please bid the full amount or any amount lower than ${dustLimitAllowance} ${
+                          process.env.STBL_NAME
+                        }. It is not permitted to leave less than the dust limit of ${dustLimit.toFormat(
                           2
-                        )} USDV in the auction.`
+                        )} ${process.env.STBL_NAME} in the auction.`
                       : 'Insufficient funds'}
                   </Text>
                 )}

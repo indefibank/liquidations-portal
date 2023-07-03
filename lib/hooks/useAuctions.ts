@@ -21,7 +21,9 @@ export function useAuctions(ilk?: string): { data?: Auction[]; loading: boolean;
     // sets interval to 60 seconds for "all ilk" queries, 10 seconds for ilk-specific
     refreshInterval: ilk === 'all' ? 60000 : 10000
   });
-
+  console.log(`auctions response: ${data}, with error: ${error}`);
+  console.log(data);
+  console.log(error);
   return {
     data,
     loading: !error && !data,

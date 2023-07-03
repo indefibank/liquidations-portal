@@ -19,7 +19,7 @@ const NoActiveAuctions = ({ error }: Props): JSX.Element => (
     }}
   >
     <Box>
-      <h2>VELERO Liquidation Portal</h2>
+      <h2>{`${process.env.COMPANY_NAME} Liquidation Portal`}</h2>
       {/*<Icon*/}
       {/*  name="maker"*/}
       {/*  size={5}*/}

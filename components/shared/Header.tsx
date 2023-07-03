@@ -22,7 +22,7 @@ import { Icon } from '@makerdao/dai-ui-icons';
 
 import { COLLATERAL_ARRAY, COLLATERAL_MAP } from 'lib/constants';
 import { getNetwork } from 'lib/maker';
-import { useAuctions, useAccountVatBalance, useAccountVdgtBalance } from 'lib/hooks';
+import { useAuctions, useAccountVatBalance, useAccountGovBalance } from 'lib/hooks';
 import { bigNumToFormat } from 'lib/utils';
 import { useModalsStore } from 'stores/modals';
 import useAccountsStore from 'stores/accounts';
@@ -42,10 +42,10 @@ const Header = (): JSX.Element => {
   const address = account?.address;
   const initApprovals = useApprovalsStore(state => state.initApprovals);
   const { data: vatBalance = new BigNumber(0) } = useAccountVatBalance(address);
-  const { data: vdgtBalance = new BigNumber(0) } = useAccountVdgtBalance(address);
+  const { data: govBalance = new BigNumber(0) } = useAccountGovBalance(address);
 
-  console.log(`vdgt balance: ${vdgtBalance}`);
-  console.log(`usdv in vat balance: ${vatBalance}`);
+  console.log(`${process.env.GOV_NAME} balance: ${govBalance}`);
+  console.log(`${process.env.STBL_NAME} in vat balance: ${vatBalance}`);
 
   useEffect(() => {
     if (!address) return;
@@ -77,15 +77,15 @@ const Header = (): JSX.Element => {
         }}
       >
         {/*<Link href={{ pathname: '/', query: { network } }}>*/}
-        {/*  <IconButton aria-label="Velero home" sx={{ width: '80px', height: 4, p: 0 }}>*/}
-        {/*    VELERO*/}
+        {/*  <IconButton aria-label="Indefibank home" sx={{ width: '80px', height: 4, p: 0 }}>*/}
+        {/*    Indefibank*/}
         {/*    /!*<Icon name="maker" size="40px" color="ornament" sx={{ cursor: 'pointer' }}/>*!/*/}
         {/*  </IconButton>*/}
         {/*</Link>*/}
         <Link href={{ pathname: '/', query: { network } }}>
-          <IconButton aria-label="Velero home" sx={{ width: '40px', height: 4, p: 0 }}>
+          <IconButton aria-label="home" sx={{ width: '40px', height: 4, p: 0 }}>
             {/*<Icon name="maker" size="40px" sx={{ cursor: 'pointer' }} />*/}
-            <Text sx={{ cursor: 'pointer' }}>VELERO</Text>
+            <Text sx={{ cursor: 'pointer' }}>{`${process.env.COMPANY_NAME}`}</Text>
           </IconButton>
         </Link>
         <Flex sx={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -154,7 +154,7 @@ const Header = (): JSX.Element => {
           {address && (
             <Flex sx={{ alignItems: 'center' }}>
               <Button
-                aria-label="Deposit or Withdraw Usdv"
+                aria-label="Deposit or Withdraw STBL"
                 sx={{
                   variant: 'buttons.card',
                   borderRadius: 'round',
@@ -172,17 +172,19 @@ const Header = (): JSX.Element => {
                 onClick={toggleDepositWithdraw}
               >
                 <Flex sx={{ alignItems: 'center' }}>
-                  <Text>{bigNumToFormat(vatBalance, 'USDV')} </Text>
-                  {/*<Image src={'velero-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
-                  {/*<Icon name="usdv" size="16px" sx={{ mx: [0, 2] }} />*/}
-                  <Text sx={{ display: ['none', 'block'] }}>USDV Deposit/Withdraw</Text>
+                  <Text>{bigNumToFormat(vatBalance, `${process.env.STBL_NAME}`)} </Text>
+                  {/*<Image src={'Indefibank-logo_24x24.svg'} sx={{height: 24, maxWidth: 'none'}}/>*/}
+                  {/*<Icon name="stbl" size="16px" sx={{ mx: [0, 2] }} />*/}
+                  <Text
+                    sx={{ display: ['none', 'block'] }}
+                  >{`${process.env.STBL_NAME} Deposit/Withdraw`}</Text>
                 </Flex>
               </Button>
             </Flex>
           )}
 
           <Button
-            aria-label="VDGT balance"
+            aria-label="gov token balance"
             sx={{
               variant: 'buttons.card',
               borderRadius: 'round',
@@ -199,8 +201,8 @@ const Header = (): JSX.Element => {
             }}
           >
             <Flex sx={{ alignItems: 'center' }}>
-              <Text>{bigNumToFormat(vdgtBalance, 'VDGT')} </Text>
-              <Text sx={{ display: ['none', 'block'] }}>VDGT</Text>
+              <Text>{bigNumToFormat(govBalance, `${process.env.GOV_NAME}`)} </Text>
+              <Text sx={{ display: ['none', 'block'] }}>{`${process.env.GOV_NAME}`}</Text>
             </Flex>
           </Button>
 

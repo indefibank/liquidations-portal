@@ -23,7 +23,7 @@ export const getLibrary = (provider, connector) => ({ provider, connector });
 // export type ConnectorName = 'MetaMask' | 'WalletConnect' | 'WalletLink' | 'Trezor' | 'Ledger';
 export type ConnectorName = 'MetaMask';
 
-export const injectedConnector = new InjectedConnector({ supportedChainIds: [106, 111] });
+export const injectedConnector = new InjectedConnector({ supportedChainIds: [80001] });
 
 export const connectors: Array<[ConnectorName, AbstractConnector]> = [
   ['MetaMask', injectedConnector]

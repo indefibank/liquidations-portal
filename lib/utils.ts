@@ -52,8 +52,8 @@ export function getEtherscanLink(
   type: 'transaction' | 'address'
 ): string {
   const prefix = `https://${
-    ETHERSCAN_PREFIXES[network] || ETHERSCAN_PREFIXES[SupportedNetworks.VELAS]
-  }velas.com`;
+    ETHERSCAN_PREFIXES[network] || ETHERSCAN_PREFIXES[SupportedNetworks.MAINNET]
+  }etherscan.com`;
 
   switch (type) {
     case 'transaction':
@@ -148,8 +148,8 @@ export function fromRay(value): BigNumber {
   return new BigNumber(value).shiftedBy(-27);
 }
 
-export const calculateCollateralAmt = (usdvAmt: BigNumber, colPrice: BigNumber): BigNumber =>
-  usdvAmt.isNaN() || colPrice.eq(0) ? new BigNumber(0) : usdvAmt.div(colPrice);
+export const calculateCollateralAmt = (stblAmt: BigNumber, colPrice: BigNumber): BigNumber =>
+  stblAmt.isNaN() || colPrice.eq(0) ? new BigNumber(0) : stblAmt.div(colPrice);
 
 export const calculateColValue = (colAmt: BigNumber, colPrice: BigNumber): BigNumber =>
   colAmt.times(colPrice);
@@ -175,7 +175,7 @@ export function transformAuctions(response: any): Auction[] {
     initialCollateral: '1000', // can look up by `sales()`
     urn: resp.usr,
     collateralAvailable: resp.lot,
-    usdvNeeded: resp.tab,
+    stblNeeded: resp.tab,
     dustLimit: resp.chost,
     startDate: resp.tic,
     endDate: resp.endDate
@@ -194,12 +194,12 @@ export function getAuctionsByIlk(auctions: any[] = [], ilk: string): any[] {
   return auctions.filter(auction => auction.ilk === ilk);
 }
 
-export function getUsdvRequiredForAuctions(auctions: any[] = []): BigNumber {
-  const usdvNeeded = auctions.reduce((acc, cur) => {
-    const num = new BigNumber(cur.usdvNeeded);
+export function getStblRequiredForAuctions(auctions: any[] = []): BigNumber {
+  const stblNeeded = auctions.reduce((acc, cur) => {
+    const num = new BigNumber(cur.stblNeeded);
     return acc.plus(num);
   }, new BigNumber(0));
-  return usdvNeeded;
+  return stblNeeded;
 }
 
 export function getTotalCollateralAvailable(auctions: any[] = []): BigNumber {
@@ -217,9 +217,9 @@ export function bigNumToFormat(value: BigNumber, ilk: string): string {
   console.log(`ilk: ${ilk}`);
 
   switch (ilk) {
-    case 'USDV':
+    case `${process.env.STBL_NAME}`:
       return value.toFormat(2);
-    case 'VDGT':
+    case `${process.env.GOV_NAME}`:
       return value.toFormat(4);
     default:
       return cur.bigNumFormatter(value);

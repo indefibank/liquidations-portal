@@ -36,26 +36,26 @@ type Props = {
 
 const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Element => {
   const [
-    hasJoinUsdvApproval,
-    hasJoinUsdvHope,
-    enableJoinUsdvApproval,
-    enableJoinUsdvHope,
-    joinUsdvApprovalPending,
-    joinUsdvHopePending
+    hasJoinStblApproval,
+    hasJoinStblHope,
+    enableJoinStblApproval,
+    enableJoinStblHope,
+    joinStblApprovalPending,
+    joinStblHopePending
   ] = useApprovalsStore(state => [
-    state.hasJoinUsdvApproval,
-    state.hasJoinUsdvHope,
-    state.enableJoinUsdvApproval,
-    state.enableJoinUsdvHope,
-    state.joinUsdvApprovalPending,
-    state.joinUsdvHopePending
+    state.hasJoinStblApproval,
+    state.hasJoinStblHope,
+    state.enableJoinStblApproval,
+    state.enableJoinStblHope,
+    state.joinStblApprovalPending,
+    state.joinStblHopePending
   ]);
   const [isDeposit, setIsDeposit] = useState(true);
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
   const account = useAccountsStore(state => state.currentAccount);
   const address = account?.address;
-  const { data: usdvBalance } = useAccountTokenBalance('USDV', address);
+  const { data: stblBalance } = useAccountTokenBalance(`${process.env.STBL_NAME}`, address);
   console.log(`vat balance for address: ${address}`);
   const { data: vatBalance } = useAccountVatBalance(address);
 
@@ -101,54 +101,57 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
     return (
       <>
         <Text sx={{ color: 'secondaryEmphasis', mb: 2 }}>
-          To participate in auctions you need to sign the approval transactions below and move Usdv that will
-          be used for bidding to the VAT
+          {`To participate in auctions you need to sign the approval transactions below and move ${process.env.STBL_NAME} that will
+                be used for bidding to the VAT`}
         </Text>
         <Divider sx={{ width: '100%' }} />
         <Flex sx={{ justifyContent: 'space-between', my: 2 }}>
-          <Text sx={{ fontWeight: 'semiBold' }}>Usdv Wallet Balance</Text>
-          <Text>{bigNumToFormat(usdvBalance, 'USDV')}</Text>
+          <Text sx={{ fontWeight: 'semiBold' }}>{`${process.env.STBL_NAME} Wallet Balance`}</Text>
+          <Text>{bigNumToFormat(stblBalance, `${process.env.STBL_NAME}`)}</Text>
         </Flex>
         <Divider sx={{ width: '100%', mb: 3 }} />
 
         <Stack gap={4} sx={{ mt: 4 }}>
           <Box>
             <Flex sx={{ justifyContent: 'space-between', my: 2 }}>
-              <Text sx={{ fontWeight: 'semiBold' }}>Usdv in the VAT</Text>
-              <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
+              <Text sx={{ fontWeight: 'semiBold' }}>{`${process.env.STBL_NAME} in the VAT`}</Text>
+              <Text>{bigNumToFormat(vatBalance, `${process.env.STBL_NAME}`)}</Text>
             </Flex>
             <Button
               sx={{ width: '100%' }}
-              onClick={enableJoinUsdvApproval}
-              disabled={hasJoinUsdvApproval || joinUsdvApprovalPending}
-              variant={hasJoinUsdvApproval || joinUsdvApprovalPending ? 'outline' : 'primary'}
+              onClick={enableJoinStblApproval}
+              disabled={hasJoinStblApproval || joinStblApprovalPending}
+              variant={hasJoinStblApproval || joinStblApprovalPending ? 'outline' : 'primary'}
             >
-              {!hasJoinUsdvApproval && !joinUsdvApprovalPending && 'Unlock Usdv in the VAT'}
-              {joinUsdvApprovalPending && (
+              {!hasJoinStblApproval &&
+                !joinStblApprovalPending &&
+                `Unlock ${process.env.STBL_NAME} in the VAT`}
+              {joinStblApprovalPending && (
                 <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
-                  Unlocking USDV in the VAT <Spinner size={20} ml={2} />
+                  {`Unlocking ${process.env.STBL_NAME} in the VAT`} <Spinner size={20} ml={2} />
                 </Flex>
               )}
-              {hasJoinUsdvApproval && (
+              {hasJoinStblApproval && (
                 <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
-                  Usdv in the VAT Unlocked <Icon name="checkmark" color="primary" ml={2} />
+                  {`${process.env.STBL_NAME} in the VAT Unlocked`}{' '}
+                  <Icon name="checkmark" color="primary" ml={2} />
                 </Flex>
               )}
             </Button>
-            {!(hasJoinUsdvApproval || joinUsdvApprovalPending) && (
+            {!(hasJoinStblApproval || joinStblApprovalPending) && (
               <Text sx={{ color: 'textSecondary', textAlign: 'center', mt: 2 }}>
-                This action allows you to deposit Usdv into the VAT
+                {`This action allows you to deposit ${process.env.STBL_NAME} into the VAT`}
               </Text>
             )}
           </Box>
           <Box>
             <Button
               sx={{ width: '100%' }}
-              onClick={enableJoinUsdvHope}
-              disabled={hasJoinUsdvHope || joinUsdvHopePending}
-              variant={hasJoinUsdvHope || joinUsdvHopePending ? 'outline' : 'primary'}
+              onClick={enableJoinStblHope}
+              disabled={hasJoinStblHope || joinStblHopePending}
+              variant={hasJoinStblHope || joinStblHopePending ? 'outline' : 'primary'}
             >
-              {!joinUsdvHopePending ? (
+              {!joinStblHopePending ? (
                 'Authorize the VAT'
               ) : (
                 <Flex sx={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -157,7 +160,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
               )}
             </Button>
             <Text sx={{ color: 'textSecondary', textAlign: 'center', mt: 2 }}>
-              This action allows the VAT to use the USDV you have deposited
+              {`This action allows the VAT to use the ${process.env.STBL_NAME} you have deposited`}
             </Text>
           </Box>
         </Stack>
@@ -170,7 +173,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
     const [isTxProcessing, setIsTxProcessing] = useState<boolean>(false);
     const [isTxError, setIsTxError] = useState<{ txId: string; error: string; hash: string } | null>(null);
 
-    const canDeposit = new BigNumber(value).lte(new BigNumber(usdvBalance));
+    const canDeposit = new BigNumber(value).lte(new BigNumber(stblBalance));
     const canWithdraw = new BigNumber(value).lte(new BigNumber(vatBalance));
 
     const resetModalState = () => {
@@ -186,33 +189,37 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
     };
 
     const depositMax = () => {
-      setValue(usdvBalance.toFixed(6));
+      setValue(stblBalance.toFixed(6));
     };
 
     const withdrawMax = () => {
       setValue(vatBalance.toFixed(6));
     };
 
-    const moveUsdv = async () => {
+    const moveStbl = async () => {
       const maker = await getMaker();
       const txCreator = isDeposit
-        ? () => maker.service('liquidation').joinUsdvToAdapter(value)
-        : () => maker.service('liquidation').exitUsdvFromAdapter(value);
+        ? () => maker.service('liquidation').joinStblToAdapter(value)
+        : () => maker.service('liquidation').exitStblFromAdapter(value);
 
-      await transactionsApi.getState().track(txCreator, `${isDeposit ? 'Depositing' : 'Withdrawing'} USDV`, {
-        pending: () => {
-          setIsTxProcessing(true);
-          setIsTxError(null);
-        },
-        mined: txId => {
-          transactionsApi.getState().setMessage(txId, `${isDeposit ? 'Deposit' : 'Withdraw'} USDV finished`);
-          onDismiss();
-        },
-        error: (txId, error, hash) => {
-          setIsTxProcessing(false);
-          setIsTxError({ txId, error, hash });
-        }
-      });
+      await transactionsApi
+        .getState()
+        .track(txCreator, `${isDeposit ? 'Depositing' : 'Withdrawing'} ${process.env.STBL_NAME}`, {
+          pending: () => {
+            setIsTxProcessing(true);
+            setIsTxError(null);
+          },
+          mined: txId => {
+            transactionsApi
+              .getState()
+              .setMessage(txId, `${isDeposit ? 'Deposit' : 'Withdraw'} ${process.env.STBL_NAME} finished`);
+            onDismiss();
+          },
+          error: (txId, error, hash) => {
+            setIsTxProcessing(false);
+            setIsTxError({ txId, error, hash });
+          }
+        });
     };
 
     const ErrorContent = () => {
@@ -239,7 +246,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
                 fontSize: 2
               }}
             >
-              View on VelasExplorer <Icon name="arrowTopRight" size="2" color="accentBlue" />
+              View on BlockExplorer <Icon name="arrowTopRight" size="2" color="accentBlue" />
             </Text>
           </Link>
           <Button variant="primaryOutline" onClick={resetModalState} sx={{ width: '100%', mt: 4, mb: 2 }}>
@@ -254,13 +261,13 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
     ) : (
       <>
         <Text sx={{ color: 'secondaryEmphasis', mb: 2 }}>
-          You can deposit Usdv in the VAT here. This is the USDV that you will be able to use for bidding on
-          auctions.
+          {`You can deposit ${process.env.STBL_NAME} in the VAT here. This is the ${process.env.STBL_NAME} that you will be able to use for bidding on
+                auctions.`}
         </Text>
         <Divider sx={{ width: '100%' }} />
         <Flex sx={{ justifyContent: 'space-between', my: 2 }}>
-          <Text sx={{ fontWeight: 'semiBold' }}>Usdv Wallet Balance</Text>
-          <Text>{bigNumToFormat(usdvBalance, 'USDV')}</Text>
+          <Text sx={{ fontWeight: 'semiBold' }}>{`${process.env.STBL_NAME} Wallet Balance`}</Text>
+          <Text>{bigNumToFormat(stblBalance, `${process.env.STBL_NAME}`)}</Text>
         </Flex>
         <Divider sx={{ width: '100%', mb: 3 }} />
         <Flex sx={{ mb: 4 }}>
@@ -280,7 +287,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
             }}
             onClick={() => setIsDeposit(!isDeposit)}
           >
-            Deposit Usdv
+            {`Deposit ${process.env.STBL_NAME}`}
           </Button>
           <Button
             sx={{
@@ -298,26 +305,26 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
             }}
             onClick={() => setIsDeposit(!isDeposit)}
           >
-            Withdraw Usdv
+            {`Withdraw ${process.env.STBL_NAME}`}
           </Button>
         </Flex>
         <Flex sx={{ justifyContent: 'space-between', mb: 2 }}>
-          <Text sx={{ fontWeight: 'semiBold' }}>Usdv in the VAT</Text>
-          <Text>{bigNumToFormat(vatBalance, 'USDV')}</Text>
+          <Text sx={{ fontWeight: 'semiBold' }}>{`${process.env.STBL_NAME} in the VAT`}</Text>
+          <Text>{bigNumToFormat(vatBalance, `${process.env.STBL_NAME}`)}</Text>
         </Flex>
         {isDeposit ? (
           <Flex sx={{ mb: 4, position: 'relative' }}>
             <Input sx={{ mr: 2 }} placeholder="0.00" onChange={updateValue} type="number" value={value} />
             <Button
               variant="textual"
-              disabled={usdvBalance.lte(0)}
+              disabled={stblBalance.lte(0)}
               onClick={depositMax}
               sx={{
                 position: 'absolute',
                 right: 152,
                 top: '6px',
-                cursor: usdvBalance.lte(0) ? 'not-allowed' : 'cursor',
-                color: usdvBalance.lte(0) ? 'textSecondary' : 'primary',
+                cursor: stblBalance.lte(0) ? 'not-allowed' : 'cursor',
+                color: stblBalance.lte(0) ? 'textSecondary' : 'primary',
                 fontSize: '10px',
                 fontWeight: 'bold',
                 textTransform: 'uppercase'
@@ -325,8 +332,12 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
             >
               max
             </Button>
-            <Button sx={{ width: 180 }} onClick={moveUsdv} disabled={isTxProcessing || !canDeposit}>
-              {isTxProcessing ? <Spinner size={20} sx={{ color: 'primary' }} /> : 'Deposit Usdv'}
+            <Button sx={{ width: 180 }} onClick={moveStbl} disabled={isTxProcessing || !canDeposit}>
+              {isTxProcessing ? (
+                <Spinner size={20} sx={{ color: 'primary' }} />
+              ) : (
+                `Deposit ${process.env.STBL_NAME}`
+              )}
             </Button>
           </Flex>
         ) : (
@@ -347,8 +358,8 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
                 position: 'absolute',
                 right: 152,
                 top: '6px',
-                cursor: usdvBalance.lte(0) ? 'not-allowed' : 'cursor',
-                color: usdvBalance.lte(0) ? 'textSecondary' : 'primary',
+                cursor: stblBalance.lte(0) ? 'not-allowed' : 'cursor',
+                color: stblBalance.lte(0) ? 'textSecondary' : 'primary',
                 fontSize: '10px',
                 fontWeight: 'bold',
                 textTransform: 'uppercase'
@@ -356,8 +367,12 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
             >
               max
             </Button>
-            <Button sx={{ width: 180 }} onClick={moveUsdv} disabled={isTxProcessing || !canWithdraw}>
-              {isTxProcessing ? <Spinner size={20} sx={{ color: 'primary' }} /> : 'Withdraw Usdv'}
+            <Button sx={{ width: 180 }} onClick={moveStbl} disabled={isTxProcessing || !canWithdraw}>
+              {isTxProcessing ? (
+                <Spinner size={20} sx={{ color: 'primary' }} />
+              ) : (
+                `Withdraw ${process.env.STBL_NAME}`
+              )}
             </Button>
           </Flex>
         )}
@@ -371,7 +386,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
   return (
     <DialogOverlay isOpen={showDialog} onDismiss={onDismiss}>
       <DialogContent
-        aria-label="Deposit or withdraw Usdv"
+        aria-label="Deposit or withdraw STBL"
         sx={
           mobile
             ? { variant: 'dialog.mobile', animation: `${slideUp} 350ms ease` }
@@ -381,9 +396,9 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
         <Flex sx={{ flexDirection: 'column', pb: 3 }}>
           <Flex sx={{ justifyContent: 'space-between', mb: 2 }}>
             <Heading sx={{ fontWeight: 'bold' }}>
-              {!hasJoinUsdvApproval && !hasJoinUsdvHope && !hasAcceptedTerms
+              {!hasJoinStblApproval && !hasJoinStblHope && !hasAcceptedTerms
                 ? 'Terms of Use'
-                : 'Unlock USDV to bid'}
+                : `Unlock ${process.env.STBL_NAME} to bid`}
             </Heading>
             <Close
               sx={{
@@ -398,7 +413,7 @@ const DepositWithdrawModal = ({ showDialog, onDismiss, mobile }: Props): JSX.Ele
               onClick={onDismiss}
             />
           </Flex>
-          {hasJoinUsdvApproval && hasJoinUsdvHope ? (
+          {hasJoinStblApproval && hasJoinStblHope ? (
             <DepositWithdrawContent />
           ) : !hasAcceptedTerms ? (
             <LegalContent />

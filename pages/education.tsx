@@ -13,7 +13,7 @@ export default function Education({ source }): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Velero Liquidations Portal – Education</title>
+        <title>{`${process.env.COMPANY_NAME} Liquidations Portal – Education`}</title>
       </Head>
 
       <PrimaryLayout

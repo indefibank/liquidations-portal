@@ -44,10 +44,10 @@ export async function getVatGemBalance(ilk?: string, address?: string): Promise<
 
 export async function getAccountVatBalance(address?: string): Promise<any> {
   const maker = await getMaker();
-  return maker.service('smartContract').getContract('MCD_VAT').usdv(address);
+  return maker.service('smartContract').getContract('MCD_VAT').stbl(address);
 }
 
-export async function getAccountVdgtBalance(address?: string): Promise<any> {
+export async function getAccountGovBalance(address?: string): Promise<any> {
   const maker = await getMaker();
   return maker.service('smartContract').getContract('MCD_GOV').balanceOf(address);
 }

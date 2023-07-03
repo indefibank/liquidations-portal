@@ -6,7 +6,7 @@ index 6112cae..d91dd71 100644
  
  var _WETH = _interopRequireDefault(require("./abis/WETH9.json"));
  
-+var _WVLX = _interopRequireDefault(require("./abis/WETH9.json"));
++var _WCOIN = _interopRequireDefault(require("./abis/WETH9.json"));
 +
  var _DSValue = _interopRequireDefault(require("./abis/DSValue.json"));
  
@@ -15,33 +15,33 @@ index 6112cae..d91dd71 100644
  var dappHub = {
    dsValue: _DSValue["default"],
    dsEthToken: _WETH["default"],
-+  dsVlxToken: _WVLX["default"],
++  dsCoinToken: _WCOIN["default"],
    dsGuard: _DSGuard["default"],
    dsChief: _DSChief["default"],
    dsSpell: _DSSpell["default"],
-diff --git a/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json b/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json
+diff --git a/node_modules/@makerdao/dai/dist/contracts/abis/WCOIN9.json b/node_modules/@makerdao/dai/dist/contracts/abis/WCOIN9.json
 new file mode 100644
 index 0000000..68e6e23
 --- /dev/null
-+++ b/node_modules/@makerdao/dai/dist/contracts/abis/WVLX9.json
++++ b/node_modules/@makerdao/dai/dist/contracts/abis/WCOIN9.json
 @@ -0,0 +1 @@
 +[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"guy","type":"address"},{"name":"wad","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"src","type":"address"},{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"wad","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"dst","type":"address"},{"name":"wad","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":true,"name":"guy","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":true,"name":"dst","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"dst","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"src","type":"address"},{"indexed":false,"name":"wad","type":"uint256"}],"name":"Withdrawal","type":"event"}]
-diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json b/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json
+diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/mumbai.json b/node_modules/@makerdao/dai/dist/contracts/addresses/mumbai.json
 new file mode 100644
 index 0000000..4663b08
 --- /dev/null
-+++ b/node_modules/@makerdao/dai/dist/contracts/addresses/velas.json
++++ b/node_modules/@makerdao/dai/dist/contracts/addresses/mumbai.json
 @@ -0,0 +1,5 @@
 +{
 +  "PROXY_REGISTRY": "0xA180801dd1DB8dE215af785f5f1da59622B89FEa",
 +  "DS_PROXY_FACTORY": "0xfd2702f8f5f9EF7C072E1f145E351882B23d9167",
 +  "MULTICALL": "0x9FcEBD2132Ce7F1Bf0B559b4239FF3c667dac04a"
 +}
-diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
+diff --git a/node_modules/@makerdao/dai/dist/contracts/addresses/polygon.json b/node_modules/@makerdao/dai/dist/contracts/addresses/polygon.json
 new file mode 100644
 index 0000000..3f9fdd5
 --- /dev/null
-+++ b/node_modules/@makerdao/dai/dist/contracts/addresses/velastestnet.json
++++ b/node_modules/@makerdao/dai/dist/contracts/addresses/polygon.json
 @@ -0,0 +1,5 @@
 +{
 +  "PROXY_REGISTRY": "0x679a616b2A804D4Ac2612739507a93e7fa56173b",
@@ -56,17 +56,17 @@ index 1c7c7a3..fdf9804 100644
  
  var _testnet = _interopRequireDefault(require("./addresses/testnet.json"));
  
-+var _velas = _interopRequireDefault(require("./addresses/velas.json"));
++var _mumbai = _interopRequireDefault(require("./addresses/mumbai.json"));
 +
-+var _velastestnet = _interopRequireDefault(require("./addresses/velastestnet.json"));
++var _polygon = _interopRequireDefault(require("./addresses/polygon.json"));
 +
  var addressMapping = {
    mainnet: _mainnet["default"],
    kovan: _kovan["default"],
 -  testnet: _testnet["default"]
 +  testnet: _testnet["default"],
-+  velas: _velas["default"],
-+  velastestnet: _velastestnet["default"]
++  mumbai: _mumbai["default"],
++  polygon: _polygon["default"]
  };
  
  function contractAddressesInfo(addresses) {
@@ -75,13 +75,13 @@ index 1c7c7a3..fdf9804 100644
    networkId: 42,
    contracts: contractInfo('kovan')
 +}, {
-+  name: 'velas',
-+  networkId: 106,
-+  contracts: contractInfo('velas')
++  name: 'mumbai',
++  networkId: 80001,
++  contracts: contractInfo('mumbai')
 +}, {
-+  name: 'velastestnet',
-+  networkId: 111,
-+  contracts: contractInfo('velastestnet')
++  name: 'polygon',
++  networkId: 137,
++  contracts: contractInfo('polygon')
  }, {
    name: 'test',
    networkId: 1337,
@@ -108,7 +108,7 @@ index 5cfe080..9f24aca 100644
        // up when calling a contract function indirectly via two or more nested
        // service method calls, e.g.
 -      // EthereumCdpService.lockEth -> WethToken.deposit.
-+      // EthereumCdpService.lockVLX -> WethToken.deposit.
++      // EthereumCdpService.lockCOIN -> WethToken.deposit.
  
  
        if (promise) this._tracker.store((0, _utils.uniqueId)(promise), txo, {

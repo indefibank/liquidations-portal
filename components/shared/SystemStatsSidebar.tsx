@@ -4,7 +4,7 @@ import { Icon } from '@makerdao/dai-ui-icons';
 import Skeleton from 'react-loading-skeleton';
 
 import { getVulcanizeParam } from 'lib/maker';
-import { getAuctionCountByStatus, getUsdvRequiredForAuctions } from 'lib/utils';
+import { getAuctionCountByStatus, getStblRequiredForAuctions } from 'lib/utils';
 import { useSystemStatsSidebar } from 'lib/hooks';
 import { TOOLTIP_DICT } from 'lib/constants';
 import SystemStat from 'types/systemStat';
@@ -21,11 +21,11 @@ export default function SystemStatsSidebar({ ilk }: Props): JSX.Element {
   const usingVulcanize = getVulcanizeParam();
 
   const fieldMap: SystemStat[] = [
-    {
-      title: 'Undercollateralized Vaults',
-      format: val => val.length,
-      tooltip: TOOLTIP_DICT.UNDERCOLLATERALIZED_VAULTS
-    },
+    // {
+    //   title: 'Undercollateralized Vaults',
+    //   format: val => val.length,
+    //   tooltip: TOOLTIP_DICT.UNDERCOLLATERALIZED_VAULTS
+    // },
     {
       title: 'Active Auctions',
       format: val => getAuctionCountByStatus(val, true).toString(),
@@ -37,13 +37,13 @@ export default function SystemStatsSidebar({ ilk }: Props): JSX.Element {
       tooltip: TOOLTIP_DICT.INACTIVE_AUCTIONS
     },
     {
-      title: 'Usdv required for Auctions',
-      format: val => `${getUsdvRequiredForAuctions(val).toFormat(0)} USDV`,
-      tooltip: TOOLTIP_DICT.USDV_REQUIRED
+      title: `${process.env.STBL_NAME} required for Auctions`,
+      format: val => `${getStblRequiredForAuctions(val).toFormat(0)} ${process.env.STBL_NAME}`,
+      tooltip: TOOLTIP_DICT.STBL_REQUIRED
     },
     {
       title: 'Limit per collateral available',
-      format: val => `${val && val.diff ? val.diff.toFormat(2) : '--'} USDV`,
+      format: val => `${val && val.diff ? val.diff.toFormat(2) : '--'} ${process.env.STBL_NAME}`,
       tooltip: TOOLTIP_DICT.MAX_AVAILABLE
     }
   ];

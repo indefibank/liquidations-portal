@@ -13,7 +13,7 @@ export default function Education({ source }): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Velero Liquidations Portal – Terms</title>
+        <title>{`${process.env.COMPANY_NAME} Liquidations Portal – Terms`}</title>
       </Head>
 
       <PrimaryLayout shortenFooter={true} sx={{ maxWidth: [null, null, null, 'page', 'dashboard'] }}>

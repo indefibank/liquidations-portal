@@ -4,7 +4,7 @@ import { Icon } from '@makerdao/dai-ui-icons';
 import Skeleton from 'react-loading-skeleton';
 
 import { getVulcanizeParam } from 'lib/maker';
-import { getAuctionCountByStatus, getUsdvRequiredForAuctions } from 'lib/utils';
+import { getAuctionCountByStatus, getStblRequiredForAuctions } from 'lib/utils';
 import { useSystemStats } from 'lib/hooks';
 import { TOOLTIP_DICT } from 'lib/constants';
 import SystemStat from 'types/systemStat';
@@ -28,20 +28,20 @@ export default function SystemStats(): JSX.Element {
       format: val => (usingVulcanize ? getAuctionCountByStatus(val, false).toString() : '--'),
       tooltip: TOOLTIP_DICT.INACTIVE_AUCTIONS
     },
+    // {
+    //   title: 'Vaults requiring kick',
+    //   format: val => val.length,
+    //   tooltip: TOOLTIP_DICT.UNDERCOLLATERALIZED_VAULTS
+    // },
     {
-      title: 'Vaults requiring kick',
-      format: val => val.length,
-      tooltip: TOOLTIP_DICT.UNDERCOLLATERALIZED_VAULTS
-    },
-    {
-      title: 'Usdv required for Auctions',
-      format: val => `${getUsdvRequiredForAuctions(val).toFormat(0)} USDV`,
+      title: `${process.env.STBL_NAME} required for Auctions`,
+      format: val => `${getStblRequiredForAuctions(val).toFormat(0)} ${process.env.STBL_NAME}`,
       minWidth: 185,
-      tooltip: TOOLTIP_DICT.USDV_REQUIRED
+      tooltip: TOOLTIP_DICT.STBL_REQUIRED
     },
     {
       title: 'Global max available',
-      format: val => `${val.toFormat(0)} USDV`,
+      format: val => `${val.toFormat(0)} ${process.env.STBL_NAME}`,
       minWidth: 205,
       tooltip: TOOLTIP_DICT.MAX_AVAILABLE
     }

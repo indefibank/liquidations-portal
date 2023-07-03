@@ -11,7 +11,7 @@ async function fetchAccountVatBalance(address?: string): Promise<any> {
 
 export function useAccountVatBalance(address?: string): { data: BigNumber; loading: boolean; error: string } {
   console.log(`useAccountVatBalance: ${address}`);
-  const { data, error } = useSWR(address ? `/balances/vat/usdv/${address}` : null, () =>
+  const { data, error } = useSWR(address ? `/balances/vat/stbl/${address}` : null, () =>
     fetchAccountVatBalance(address)
   );
 

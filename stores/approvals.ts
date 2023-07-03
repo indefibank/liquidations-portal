@@ -3,62 +3,62 @@ import getMaker from '../lib/maker';
 import { transactionsApi } from './transactions';
 
 type Store = {
-  hasJoinUsdvApproval: boolean;
-  hasJoinUsdvHope: boolean;
+  hasJoinStblApproval: boolean;
+  hasJoinStblHope: boolean;
   hasIlkHope: Record<string, boolean>;
 
-  setHasJoinUsdvApproval: (address: string | undefined) => Promise<void>;
-  setHasJoinUsdvHope: (address: string | undefined) => Promise<void>;
+  setHasJoinStblApproval: (address: string | undefined) => Promise<void>;
+  setHasJoinStblHope: (address: string | undefined) => Promise<void>;
   setHasIlkHope: (address: string, ilk: string) => Promise<void>;
 
-  enableJoinUsdvApproval: () => Promise<void>;
-  enableJoinUsdvHope: () => Promise<void>;
+  enableJoinStblApproval: () => Promise<void>;
+  enableJoinStblHope: () => Promise<void>;
   enableIlkHope: (ilk: string) => Promise<void>;
 
-  joinUsdvApprovalPending: boolean;
-  joinUsdvHopePending: boolean;
+  joinStblApprovalPending: boolean;
+  joinStblHopePending: boolean;
   joinIlkHopePending: Record<string, boolean>;
 
   initApprovals: (address: string, ilks?: string[]) => Promise<void>;
 };
 
 const [useApprovalsStore] = create<Store>((set, get) => ({
-  hasJoinUsdvApproval: false,
-  hasJoinUsdvHope: false,
+  hasJoinStblApproval: false,
+  hasJoinStblHope: false,
   hasIlkHope: {},
-  joinUsdvApprovalPending: false,
-  joinUsdvHopePending: false,
+  joinStblApprovalPending: false,
+  joinStblHopePending: false,
   joinIlkHopePending: {},
 
-  setHasJoinUsdvApproval: async address => {
+  setHasJoinStblApproval: async address => {
     try {
       const maker = await getMaker();
       const allowance = await maker
-        .getToken('USDV')
-        .allowance(address, maker.service('smartContract').getContract('MCD_JOIN_USDV').address);
+        .getToken(`${process.env.STBL_NAME}`)
+        .allowance(address, maker.service('smartContract').getContract('MCD_JOIN_STBL').address);
       set({
-        hasJoinUsdvApproval: allowance.toBigNumber().gt(0)
+        hasJoinStblApproval: allowance.toBigNumber().gt(0)
       });
     } catch (err) {
       set({
-        hasJoinUsdvApproval: false
+        hasJoinStblApproval: false
       });
     }
   },
-  setHasJoinUsdvHope: async address => {
+  setHasJoinStblHope: async address => {
     try {
       const maker = await getMaker();
       const can = await maker
         .service('smartContract')
         .getContract('MCD_VAT')
-        .can(address, maker.service('smartContract').getContract('MCD_JOIN_USDV').address);
+        .can(address, maker.service('smartContract').getContract('MCD_JOIN_STBL').address);
 
       set({
-        hasJoinUsdvHope: can.toNumber() === 1
+        hasJoinStblHope: can.toNumber() === 1
       });
     } catch (err) {
       set({
-        hasJoinUsdvHope: false
+        hasJoinStblHope: false
       });
     }
   },
@@ -83,52 +83,52 @@ const [useApprovalsStore] = create<Store>((set, get) => ({
     }
   },
 
-  enableJoinUsdvApproval: async () => {
+  enableJoinStblApproval: async () => {
     const maker = await getMaker();
-    const address = maker.service('smartContract').getContract('MCD_JOIN_USDV').address;
-    const txCreator = () => maker.getToken('USDV').approveUnlimited(address);
+    const address = maker.service('smartContract').getContract('MCD_JOIN_STBL').address;
+    const txCreator = () => maker.getToken(`${process.env.STBL_NAME}`).approveUnlimited(address);
 
-    await transactionsApi.getState().track(txCreator, 'Join USDV approval sent', {
+    await transactionsApi.getState().track(txCreator, `Join ${process.env.STBL_NAME} approval sent`, {
       pending: () => {
         set({
-          joinUsdvApprovalPending: true
+          joinStblApprovalPending: true
         });
       },
       mined: txId => {
-        transactionsApi.getState().setMessage(txId, 'Join USDV approval finished');
+        transactionsApi.getState().setMessage(txId, `Join ${process.env.STBL_NAME} approval finished`);
         set({
-          hasJoinUsdvApproval: true,
-          joinUsdvApprovalPending: false
+          hasJoinStblApproval: true,
+          joinStblApprovalPending: false
         });
       },
       error: () => {
         set({
-          joinUsdvApprovalPending: false
+          joinStblApprovalPending: false
         });
       }
     });
   },
-  enableJoinUsdvHope: async () => {
+  enableJoinStblHope: async () => {
     const maker = await getMaker();
-    const address = maker.service('smartContract').getContract('MCD_JOIN_USDV').address;
+    const address = maker.service('smartContract').getContract('MCD_JOIN_STBL').address;
     const txCreator = () => maker.service('smartContract').getContract('MCD_VAT').hope(address);
 
-    await transactionsApi.getState().track(txCreator, 'Join USDV hope sent', {
+    await transactionsApi.getState().track(txCreator, `Join ${process.env.STBL_NAME} hope sent`, {
       pending: () => {
         set({
-          joinUsdvHopePending: true
+          joinStblHopePending: true
         });
       },
       mined: txId => {
-        transactionsApi.getState().setMessage(txId, 'Join USDV hope finished');
+        transactionsApi.getState().setMessage(txId, `Join ${process.env.STBL_NAME} hope finished`);
         set({
-          hasJoinUsdvHope: true,
-          joinUsdvHopePending: false
+          hasJoinStblHope: true,
+          joinStblHopePending: false
         });
       },
       error: () => {
         set({
-          joinUsdvHopePending: false
+          joinStblHopePending: false
         });
       }
     });
@@ -172,8 +172,8 @@ const [useApprovalsStore] = create<Store>((set, get) => ({
   },
 
   initApprovals: async (address, ilks) => {
-    get().setHasJoinUsdvApproval(address);
-    get().setHasJoinUsdvHope(address);
+    get().setHasJoinStblApproval(address);
+    get().setHasJoinStblHope(address);
     ilks?.forEach(ilk => get().setHasIlkHope(address, ilk));
   }
 }));

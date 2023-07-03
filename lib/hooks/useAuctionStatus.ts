@@ -12,7 +12,7 @@ async function fetchAuctionStatus(ilk, id): Promise<any> {
 
 export function useAuctionStatus(ilk: string, id: number): any {
   const [auctionPrice, setAuctionPrice] = useState(new BigNumber(0));
-  const [usdvNeeded, setUsdvNeeded] = useState('0');
+  const [stblNeeded, setStblNeeded] = useState('0');
   const [collateralAmount, setCollateralAmount] = useState('0');
   const [needsRedo, setNeedsRedo] = useState(false);
 
@@ -25,7 +25,7 @@ export function useAuctionStatus(ilk: string, id: number): any {
     if (data) {
       setCollateralAmount(new BigNumber(data.lot).div(WAD).toString());
       setAuctionPrice(new BigNumber(data.price).div(RAY));
-      setUsdvNeeded(new BigNumber(data.tab).div(RAD).toString());
+      setStblNeeded(new BigNumber(data.tab).div(RAD).toString());
       setNeedsRedo(data.needsRedo);
     }
   }, [data]);
@@ -33,7 +33,7 @@ export function useAuctionStatus(ilk: string, id: number): any {
   return {
     collateralAmount,
     auctionPrice,
-    usdvNeeded: usdvNeeded,
+    stblNeeded,
     needsRedo,
     loading: !error && !data,
     error

@@ -1,16 +1,24 @@
 import BigNumber from 'bignumber.js';
 
 export enum SupportedNetworks {
-  VELAS = 'velas',
-  VELASTESTNET = 'velastestnet',
-  TESTNET = 'testnet'
+  TESTNET = 'testnet',
+  MAINNET = 'mainnet',
+  POLYGON = 'polygon',
+  MUMBAI = 'mumbai'
 }
 
-export const DEFAULT_NETWORK = SupportedNetworks.VELAS;
+process.env.EXPLORER = 'explorer';
+process.env.STBL_NAME = 'STBL';
+process.env.COIN_NAME = 'MATIC';
+process.env.GOV_NAME = 'gst';
+process.env.COMPANY_NAME = 'Indefibank';
+
+export const DEFAULT_NETWORK = SupportedNetworks.MUMBAI;
 
 export const ETHERSCAN_PREFIXES = {
-  [SupportedNetworks.VELAS]: 'evmexplorer.',
-  [SupportedNetworks.VELASTESTNET]: 'evmexplorer.testnet.'
+  [SupportedNetworks.MAINNET]: 'evmexplorer.testnet.',
+  [SupportedNetworks.POLYGON]: 'evmexplorer.testnet.',
+  [SupportedNetworks.MUMBAI]: 'evmexplorer.testnet.'
 };
 
 type CollateralInfo = {
@@ -31,61 +39,28 @@ type CollateralInfo = {
 };
 
 export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
-  'WAG-A': {
-    name: 'Wagyu Swap Token',
-    ilk: 'WAG-A',
-    symbol: 'WAG',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/wag-card-texture.png',
-    bannerPng: '/assets/wag-banner-texture.png',
-    iconSvg: '/assets/wag-icon.svg',
+  'USDT-A': {
+    name: 'Tether USD',
+    ilk: 'USDT-A',
+    symbol: 'USDT',
+    bigNumFormatter: (val: BigNumber): string => val.toFormat(6),
+    cardTexturePng: '/assets/usdt-card-texture.png',
+    bannerPng: '/assets/usdt-banner-texture.png',
+    iconSvg: '/assets/usdt-icon.svg',
     colorIconName: 'ethCircleColor',
-    decimals: 18
+    decimals: 6
   },
-  'ASTRO-A': {
-    name: 'Astro Swap Token',
-    ilk: 'ASTRO-A',
-    symbol: 'ASTRO',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/astro-card-texture.png',
-    bannerPng: '/assets/astro-banner-texture.png',
-    iconSvg: '/assets/astro-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
-  'BUSD-A': {
-    name: 'Binance USD',
-    ilk: 'BUSD-A',
-    symbol: 'BUSD',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/busd-card-texture.png',
-    bannerPng: '/assets/busd-banner-texture.png',
-    iconSvg: '/assets/busd-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
-  'BNB-A': {
-    name: 'Binance Coin',
-    ilk: 'BNB-A',
-    symbol: 'BNB',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/bnb-card-texture.png',
-    bannerPng: '/assets/bnb-banner-texture.png',
-    iconSvg: '/assets/bnb-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
-  'FTM-A': {
-    name: 'Fantom Coin',
-    ilk: 'FTM-A',
-    symbol: 'FTM',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/ftm-card-texture.png',
-    bannerPng: '/assets/ftm-banner-texture.png',
-    iconSvg: '/assets/ftm-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
+  // 'BNB-A': {
+  //   name: 'Binance Coin',
+  //   ilk: 'BNB-A',
+  //   symbol: 'BNB',
+  //   bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
+  //   cardTexturePng: '/assets/bnb-card-texture.png',
+  //   bannerPng: '/assets/bnb-banner-texture.png',
+  //   iconSvg: '/assets/bnb-icon.svg',
+  //   colorIconName: 'ethCircleColor',
+  //   decimals: 18
+  // },
   'MATIC-A': {
     name: 'Polygon Coin',
     ilk: 'MATIC-A',
@@ -97,44 +72,6 @@ export const COLLATERAL_MAP: Record<string, CollateralInfo> = {
     colorIconName: 'ethCircleColor',
     decimals: 18
   },
-  'WAG_VLXVDGT-A': {
-    name: 'Wagyu LP_VLXVDGT Token',
-    pool: 'VLX-VDGT',
-    ilk: 'WAG_VLXVDGT-A',
-    symbol: 'WAG_VLXVDGT',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/wag_vlxvdgt-card-texture.png',
-    bannerPng: '/assets/wag_vlxvdgt-banner-texture.png',
-    iconSvg: '/assets/wag_vlxvdgt-icon.svg',
-    poolSvg: '/assets/wag_vlxvdgt-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18,
-    lpToken: true,
-    protocol: 'Wagyu',
-    protocolSvg: '/assets/wag-icon.svg'
-  },
-  'VLX-A': {
-    name: 'Velas',
-    ilk: 'VLX-A',
-    symbol: 'VLX',
-    bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-    cardTexturePng: '/assets/vlx-card-texture.png',
-    bannerPng: '/assets/vlx-banner-texture.png',
-    iconSvg: '/assets/vlx-icon.svg',
-    colorIconName: 'ethCircleColor',
-    decimals: 18
-  },
-  // 'VDGT-A': {
-  //   name: 'Velas',
-  //   ilk: 'VDGT-A',
-  //   symbol: 'VDGT',
-  //   bigNumFormatter: (val: BigNumber): string => val.toFormat(18),
-  //   cardTexturePng: '/assets/vdgt-card-texture.png',
-  //   bannerPng: '/assets/vdgt-banner-texture.png',
-  //   iconSvg: '/assets/vdgt-icon.svg',
-  //   colorIconName: 'ethCircleColor',
-  //   decimals: 18
-  // },
   'WBTC-A': {
     name: 'Wrapped Bitcoin',
     ilk: 'WBTC-A',
@@ -157,10 +94,9 @@ export const TOOLTIP_DICT = {
   ACTIVE_AUCTIONS: 'The number of active auctions in which you can place a bid.',
   INACTIVE_AUCTIONS: 'The number of auctions that ended in which you can no longer place a bid.',
   UNDERCOLLATERALIZED_VAULTS: 'The number of undercollateralized vaults that need to be initiated.',
-  USDV_REQUIRED: 'The amount of USDV required to purchase available auction collateral',
-  MAX_AVAILABLE: 'Max amount of USDV that can be auctioned.',
-  USDV_IN_VAT:
-    'The VAT contract is the core vault engine of the Maker Protocol and manages USDV accounting. Depositing USDV into this contract and approving permissions is necessary in order to participate in auctions.',
+  STBL_REQUIRED: `The amount of ${process.env.STBL_NAME} required to purchase available auction collateral`,
+  MAX_AVAILABLE: `Max amount of ${process.env.STBL_NAME} that can be auctioned.`,
+  STBL_IN_VAT: `The VAT contract is the core vault engine of the Maker Protocol and manages ${process.env.STBL_NAME} accounting. Depositing ${process.env.STBL_NAME} into this contract and approving permissions is necessary in order to participate in auctions.`,
   DUST_LIMIT: 'Minimum vault debt.',
   AUCTION_PRICE: 'The maximum acceptable price.'
 };
